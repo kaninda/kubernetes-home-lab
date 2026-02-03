@@ -47,3 +47,7 @@ nav:
       - Hardware: hardware.md
       - Network Topology: network-topology.md
       - OS Preparation: os-preparation.md
+      - Kubernetes Installation: kubernetes-install.md
+      - CNI (Calico): cni-calico.md
+      - Join Workers: worker-join.md
+      - Validation: validation.md
