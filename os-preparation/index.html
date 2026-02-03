@@ -709,6 +709,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#network-ranges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network ranges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key design decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -958,6 +980,36 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 - sysctl parameters are applied
 - containerd is running</p>
 <p>This node is now ready for Kubernetes installation using kubeadm.</p>
+<hr />
+<h2 id="network-ranges">Network ranges<a class="headerlink" href="#network-ranges" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Network type</th>
+<th>CIDR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home LAN</td>
+<td>192.168.1.0/24</td>
+</tr>
+<tr>
+<td>Pod Network</td>
+<td>10.244.0.0/16</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-design-decisions">Key design decisions<a class="headerlink" href="#key-design-decisions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Wired Ethernet only for cluster nodes</li>
+<li>Static addressing for predictability</li>
+<li>Dedicated Pod CIDR to avoid routing conflicts</li>
+<li>Single control plane (home lab scope)</li>
+</ul>
+<p>This topology provides a simple, stable and production-like
+foundation for Kubernetes experimentation.</p>
 
 
 
