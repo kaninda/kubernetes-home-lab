@@ -566,17 +566,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lsmod-grep-e-overlaybr_netfilter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        lsmod | grep -E &#39;overlay|br_netfilter&#39;
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configure-kernel-parameters-sysctl" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -903,75 +892,76 @@ installing Kubernetes using <strong>kubeadm</strong>.</p>
 <p>Kubernetes requires swap to be disabled.<br />
 The <strong>kubelet will refuse to start</strong> if swap is enabled.</p>
 <h3 id="disable-swap-immediately">Disable swap immediately<a class="headerlink" href="#disable-swap-immediately" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
-</code></pre></div>
+<pre><code class="language-bash">sudo swapoff -a
+</code></pre>
 <h3 id="disable-swap-permanently">Disable swap permanently<a class="headerlink" href="#disable-swap-permanently" title="Permanent link">&para;</a></h3>
-<p>Edit /etc/fstab and comment out any swap entry:
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/ swap / s/^/#/&#39;</span><span class="w"> </span>/etc/fstab
-</code></pre></div></p>
+<p>Edit /etc/fstab and comment out any swap entry:</p>
+<pre><code class="language-bash">sudo sed -i '/ swap / s/^/#/' /etc/fstab
+</code></pre>
 <h3 id="verify-swap-status">Verify swap status<a class="headerlink" href="#verify-swap-status" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>free<span class="w"> </span>-h
-</code></pre></div>
-Expected output: Swap: 0B</p>
+<pre><code class="language-bash">free -h
+</code></pre>
+<p>Expected output: Swap: 0B</p>
 <hr />
 <h2 id="load-required-kernel-modules">Load required kernel modules<a class="headerlink" href="#load-required-kernel-modules" title="Permanent link">&para;</a></h2>
 <p>Kubernetes networking requires specific kernel modules.</p>
 <h3 id="configure-modules-to-load-at-boot">Configure modules to load at boot<a class="headerlink" href="#configure-modules-to-load-at-boot" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/modules-load.d/k8s.conf<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-<span class="s">overlay</span>
-<span class="s">br_netfilter</span>
-<span class="s">EOF</span>
-</code></pre></div>
+<pre><code class="language-bash">sudo tee /etc/modules-load.d/k8s.conf &lt;&lt;EOF
+overlay
+br_netfilter
+EOF
+</code></pre>
 <h3 id="load-modules-immediately">Load modules immediately<a class="headerlink" href="#load-modules-immediately" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>modprobe<span class="w"> </span>overlay
-sudo<span class="w"> </span>modprobe<span class="w"> </span>br_netfilter
-</code></pre></div>
+<pre><code class="language-bash">sudo modprobe overlay
+sudo modprobe br_netfilter
+</code></pre>
 <h3 id="verify-loaded-modules">Verify loaded modules<a class="headerlink" href="#verify-loaded-modules" title="Permanent link">&para;</a></h3>
-<h2 id="lsmod-grep-e-overlaybr_netfilter"><div class="highlight"><pre><span></span><code>lsmod | grep -E &#39;overlay|br_netfilter&#39;
-</code></pre></div><a class="headerlink" href="#lsmod-grep-e-overlaybr_netfilter" title="Permanent link">&para;</a></h2>
+<pre><code>lsmod | grep -E 'overlay|br_netfilter'
+</code></pre>
+<hr />
 <h2 id="configure-kernel-parameters-sysctl">Configure kernel parameters (sysctl)<a class="headerlink" href="#configure-kernel-parameters-sysctl" title="Permanent link">&para;</a></h2>
 <p>Kubernetes requires proper packet forwarding and bridge traffic handling.</p>
 <h3 id="configure-sysctl-parameters">Configure sysctl parameters<a class="headerlink" href="#configure-sysctl-parameters" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/k8s.conf<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-<span class="s">net.bridge.bridge-nf-call-iptables  = 1</span>
-<span class="s">net.bridge.bridge-nf-call-ip6tables = 1</span>
-<span class="s">net.ipv4.ip_forward                = 1</span>
-<span class="s">EOF</span>
-</code></pre></div>
+<pre><code class="language-bash">sudo tee /etc/sysctl.d/k8s.conf &lt;&lt;EOF
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                = 1
+EOF
+</code></pre>
 <h3 id="apply-settings">Apply settings<a class="headerlink" href="#apply-settings" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
-</code></pre></div>
+<pre><code class="language-bash">sudo sysctl --system
+</code></pre>
 <h3 id="verify-settings">Verify settings<a class="headerlink" href="#verify-settings" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>sysctl<span class="w"> </span>net.bridge.bridge-nf-call-iptables
-sysctl<span class="w"> </span>net.ipv4.ip_forward
-</code></pre></div>
-Expected value: 1</p>
+<pre><code class="language-bash">sysctl net.bridge.bridge-nf-call-iptables
+sysctl net.ipv4.ip_forward
+</code></pre>
+<p>Expected value: 1</p>
 <hr />
 <h2 id="install-container-runtime-containerd">Install container runtime (containerd)<a class="headerlink" href="#install-container-runtime-containerd" title="Permanent link">&para;</a></h2>
 <p>Kubernetes requires a CRI-compatible container runtime.
 This lab uses containerd.</p>
 <h3 id="install-containerd">Install containerd<a class="headerlink" href="#install-containerd" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>containerd
-</code></pre></div>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install -y containerd
+</code></pre>
 <h3 id="configure-containerd">Configure containerd<a class="headerlink" href="#configure-containerd" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd
-containerd<span class="w"> </span>config<span class="w"> </span>default<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/config.toml
-</code></pre></div>
+<pre><code class="language-bash">sudo mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+</code></pre>
 <h3 id="enable-systemd-cgroup-driver">Enable systemd cgroup driver<a class="headerlink" href="#enable-systemd-cgroup-driver" title="Permanent link">&para;</a></h3>
 <p>Edit /etc/containerd/config.toml and ensure:</p>
-<p><div class="highlight"><pre><span></span><code><span class="nv">SystemdCgroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
-</code></pre></div>
-You can do it automatically:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/SystemdCgroup = false/SystemdCgroup = true/&#39;</span><span class="w"> </span>/etc/containerd/config.toml
-</code></pre></div>
+<pre><code class="language-bash">SystemdCgroup = true
+</code></pre>
+<p>You can do it automatically:</p>
+<pre><code class="language-bash">sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+</code></pre>
 <h3 id="restart-and-enable-containerd">Restart and enable containerd<a class="headerlink" href="#restart-and-enable-containerd" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
-sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>containerd
-</code></pre></div>
+<pre><code class="language-bash">sudo systemctl restart containerd
+sudo systemctl enable containerd
+</code></pre>
 <h3 id="verify-containerd-status">Verify containerd status<a class="headerlink" href="#verify-containerd-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>systemctl status containerd
-</code></pre></div>
+<pre><code>systemctl status containerd
+</code></pre>
 <hr />
 <h2 id="verify-system-readiness">Verify system readiness<a class="headerlink" href="#verify-system-readiness" title="Permanent link">&para;</a></h2>
 <p>Before moving forward, ensure the following:

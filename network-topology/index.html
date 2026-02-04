@@ -454,7 +454,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ```
+        
       
     </span>
   </a>
@@ -477,17 +477,6 @@
     <span class="md-ellipsis">
       
         Pod network (Calico)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#network-ranges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Network ranges
       
     </span>
   </a>
@@ -684,24 +673,7 @@ of the Kubernetes Home Lab.</p>
 predictable addressing.</p>
 <hr />
 <h2 id="physical-network-topology">Physical network topology<a class="headerlink" href="#physical-network-topology" title="Permanent link">&para;</a></h2>
-<p>```mermaid
-flowchart TB
-    subgraph LAN["Home LAN (192.168.1.0/24)"]
-        R["Router<br/>DHCP reservations"]
-        S["2.5 GbE Switch"]
-        R --&gt; S
-    end</p>
-<div class="highlight"><pre><span></span><code>subgraph K8S[&quot;Kubernetes Cluster&quot;]
-    CP[&quot;cp-1&lt;br/&gt;Control Plane&lt;br/&gt;192.168.1.53&quot;]
-    W1[&quot;worker-1&lt;br/&gt;Worker Node&lt;br/&gt;192.168.1.55&quot;]
-    W2[&quot;worker-2&lt;br/&gt;Worker Node&lt;br/&gt;192.168.1.56&quot;]
-end
-
-S --&gt; CP
-S --&gt; W1
-S --&gt; W2
-</code></pre></div>
-<h2 id="_1">```<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1"><img alt="Physical network topology (Calico)" src="../diagrams/physical-network-topology.svg" width="80%" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h2 id="kubernetes-control-plane-communication">Kubernetes control plane communication<a class="headerlink" href="#kubernetes-control-plane-communication" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The kube-apiserver runs on the control plane node</li>
@@ -715,22 +687,7 @@ S --&gt; W2
 - Pods communicate directly across nodes
 - Pod traffic is encapsulated and routed by Calico
 - The Pod CIDR does not overlap with the LAN network</p>
-<p>```mermaid
-flowchart TB
-    subgraph Node1["worker-1"]
-        P1["Pod"]
-        P2["Pod"]
-    end</p>
-<div class="highlight"><pre><span></span><code>subgraph Node2[&quot;worker-2&quot;]
-    P3[&quot;Pod&quot;]
-end
-
-P1 &lt;--&gt;|Calico| P3
-P2 &lt;--&gt;|Calico| P3
-</code></pre></div>
-<p>```</p>
-<hr />
-<h2 id="network-ranges">Network ranges<a class="headerlink" href="#network-ranges" title="Permanent link">&para;</a></h2>
+<p><img alt="Physical-topology (Calico)" src="../diagrams/physical-topology.svg" width="30%" /></p>
 
 
 
