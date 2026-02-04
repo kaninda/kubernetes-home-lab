@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -314,6 +319,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -331,6 +356,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cluster-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-level architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope and limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -557,9 +656,70 @@
 
 
 
-  <h1>Overview</h1>
-
-
+<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
+<p>This documentation describes the design, setup, and operation of a <strong>bare-metal Kubernetes home lab</strong>.</p>
+<p>The cluster is built using <strong>kubeadm</strong> on <strong>Ubuntu Server</strong>, with a strong focus on:
+- clarity
+- reproducibility
+- production-like behavior</p>
+<p>While this is a home lab, all design choices aim to stay as close as possible to
+real-world Kubernetes environments.</p>
+<hr />
+<h2 id="cluster-goals">Cluster goals<a class="headerlink" href="#cluster-goals" title="Permanent link">&para;</a></h2>
+<p>The main goals of this Kubernetes Home Lab are:</p>
+<ul>
+<li>Learn Kubernetes fundamentals on bare metal</li>
+<li>Understand cluster internals and networking</li>
+<li>Practice installation, upgrades and troubleshooting</li>
+<li>Experiment with CNI, storage and GitOps tools</li>
+<li>Maintain a simple but realistic setup</li>
+</ul>
+<hr />
+<h2 id="high-level-architecture">High-level architecture<a class="headerlink" href="#high-level-architecture" title="Permanent link">&para;</a></h2>
+<p>The cluster consists of:
+- one dedicated control plane node
+- multiple worker nodes
+- a flat Layer 2 home LAN
+- static IP addressing or DHCP reservations
+- a dedicated Pod network</p>
+<p>All nodes run:
+- Ubuntu Server
+- containerd as container runtime
+- kubeadm-managed Kubernetes components</p>
+<hr />
+<h2 id="design-principles">Design principles<a class="headerlink" href="#design-principles" title="Permanent link">&para;</a></h2>
+<p>This cluster follows a few key design principles:</p>
+<ul>
+<li><strong>Simplicity over complexity</strong></li>
+<li><strong>Predictability over automation</strong></li>
+<li><strong>Reproducibility over convenience</strong></li>
+<li><strong>Documentation-first approach</strong></li>
+</ul>
+<p>Each component is installed and configured explicitly to ensure full understanding
+of what happens under the hood.</p>
+<hr />
+<h2 id="scope-and-limitations">Scope and limitations<a class="headerlink" href="#scope-and-limitations" title="Permanent link">&para;</a></h2>
+<p>This home lab intentionally has the following limitations:</p>
+<ul>
+<li>Single control plane (no HA)</li>
+<li>No external load balancer</li>
+<li>No cloud provider integration</li>
+<li>No managed services</li>
+</ul>
+<p>These limitations keep the cluster easy to reason about while still allowing
+meaningful Kubernetes experimentation.</p>
+<hr />
+<h2 id="documentation-structure">Documentation structure<a class="headerlink" href="#documentation-structure" title="Permanent link">&para;</a></h2>
+<p>The documentation is organized as follows:</p>
+<ol>
+<li>Hardware description reminds the physical foundation</li>
+<li>Network topology explains physical and logical connectivity</li>
+<li>OS preparation ensures all nodes are Kubernetes-ready</li>
+<li>Kubernetes installation describes kubeadm setup</li>
+<li>CNI configuration focuses on pod networking</li>
+<li>Validation ensures cluster health and correctness</li>
+</ol>
+<p>Each section builds on the previous one and should be followed in order.</p>
 
 
 
