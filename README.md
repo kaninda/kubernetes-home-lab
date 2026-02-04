@@ -18,6 +18,38 @@ is available here: https://kaninda.github.io/kubernetes-home-lab/.
 - CNI: Calico
 - Installation method: kubeadm
 
+```mermaid
+flowchart TB
+    subgraph LAN["Home LAN (192.168.1.0/24)"]
+        R[Router / DHCP<br/>IP reservations]
+        S[2.5GbE Switch]
+    end
+
+    subgraph K8S["Kubernetes Cluster"]
+        CP["cp-1<br/>Control Plane<br/>192.168.1.53"]
+        W1["worker-1<br/>Worker Node<br/>192.168.1.55"]
+        W2["worker-2<br/>Worker Node<br/>192.168.1.56"]
+    end
+
+    R --> S
+    S --> CP
+    S --> W1
+    S --> W2
+
+    CP ---|kube-apiserver| W1
+    CP ---|kube-apiserver| W2
+
+    subgraph PODS["Pod Network (Calico)"]
+        P1["Pod"]
+        P2["Pod"]
+        P3["Pod"]
+    end
+
+    W1 --> P1
+    W2 --> P2
+    W2 --> P3
+```
+
 ## Hardware
 | Node | Role | CPU | RAM | Storage |
 |-----|-----|-----|-----|---------|
@@ -35,3 +67,13 @@ Step-by-step documentation is available in the `docs/` directory.
 
 ## Status
 🚧 Work in progress
+
+## Run mkdocs in local 
+
+```bash
+python -m mkdocs serve
+```
+## Deploy mkdocs to github page
+```bash
+python -m mkdocs gh-deploy
+```
