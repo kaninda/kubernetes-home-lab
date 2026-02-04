@@ -89,15 +89,15 @@ EOF
 ```
 
 ### Apply settings
-````bash
+```bash
 sudo sysctl --system
-````
+```
 
 ### Verify settings
-````bash
+```bash
 sysctl net.bridge.bridge-nf-call-iptables
 sysctl net.ipv4.ip_forward
-````
+```
 Expected value: 1
 
 ---
@@ -109,34 +109,34 @@ This lab uses containerd.
 
 ### Install containerd
 
-````bash
+```bash
 sudo apt-get update
 sudo apt-get install -y containerd
-````
+```
 
 ### Configure containerd
-````bash
+```bash
 sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
-````
+```
 
 ### Enable systemd cgroup driver
 Edit /etc/containerd/config.toml and ensure:
 
-````bash
+```bash
 SystemdCgroup = true
-````
+```
 You can do it automatically:
 
-````bash
+```bash
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
-````
+```
 
 ### Restart and enable containerd
-````bash
+```bash
 sudo systemctl restart containerd
 sudo systemctl enable containerd
-````
+```
 
 ### Verify containerd status
 ```
@@ -146,7 +146,6 @@ systemctl status containerd
 ---
 
 ## Verify system readiness
-
 Before moving forward, ensure the following:
 - swap is disabled
 - required kernel modules are loaded
@@ -155,4 +154,22 @@ Before moving forward, ensure the following:
 
 This node is now ready for Kubernetes installation using kubeadm.
 
+---
+## Network ranges
+
+| Network type | CIDR |
+|--|--|
+| Home LAN | 192.168.1.0/24 |
+| Pod Network | 10.244.0.0/16 |
+
+---
+## Key design decisions
+
+- Wired Ethernet only for cluster nodes
+- Static addressing for predictability
+- Dedicated Pod CIDR to avoid routing conflicts
+- Single control plane (home lab scope)
+
+This topology provides a simple, stable and production-like
+foundation for Kubernetes experimentation.
 
