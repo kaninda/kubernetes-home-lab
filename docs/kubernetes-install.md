@@ -149,6 +149,7 @@ Check core components:
 kubectl get pods -n kube-system
 ```
 Expected state:
+
 - kube-apiserver running
 - kube-controller-manager running
 - kube-scheduler running
