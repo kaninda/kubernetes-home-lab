@@ -13,10 +13,8 @@
       
       
       
-        <link rel="prev" href="../overview/">
+        <link rel="prev" href="../os-preparation/">
       
-      
-        <link rel="next" href="../network-topology/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>Hardware - Kubernetes Home Lab</title>
+        <title>Kubernetes Installation (kubeadm) - Kubernetes Home Lab</title>
       
     
     
@@ -78,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hardware" class="md-skip">
+        <a href="#kubernetes-installation-kubeadm-v134" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Hardware
+              Kubernetes Installation (kubeadm)
             
           </span>
         </div>
@@ -338,37 +336,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Hardware
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
         
   
   
@@ -384,81 +355,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#hardware-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hardware overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#control-plane-node" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Control Plane node
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#worker-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Worker nodes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#networking-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Networking hardware
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-hardware-design-decisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key hardware design decisions
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -524,10 +420,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../kubernetes-install/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes Installation (kubeadm)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -543,6 +466,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-kubernetes-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install Kubernetes packages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Kubernetes packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-kubernetes-apt-repository-v134" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add Kubernetes APT repository (v1.34)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-kubernetes-components-pinned-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install Kubernetes components (pinned version)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-kubelet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure kubelet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize-the-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initialize the control plane
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-the-join-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save the join command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-kubectl-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure kubectl access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-control-plane-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify control plane status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -656,79 +715,113 @@
 
 
 
-<h1 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h1>
-<p>This section describes the physical hardware used to build the Kubernetes Home Lab.</p>
-<p>The goal is to use <strong>compact, power-efficient, and affordable machines</strong> while keeping
-a setup close to a real-world bare-metal Kubernetes cluster.</p>
-<h2 id="hardware-overview">Hardware overview<a class="headerlink" href="#hardware-overview" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Node</th>
-<th>Role</th>
-<th>CPU</th>
-<th>RAM</th>
-<th>Storage</th>
-<th>Network</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cp-1</td>
-<td>Control Plane</td>
-<td>Ryzen 5 3500U</td>
-<td>16GB</td>
-<td>512GB SSD</td>
-<td>2.5 GbE</td>
-</tr>
-<tr>
-<td>worker-1</td>
-<td>Worker Node</td>
-<td>Ryzen 5 5500U</td>
-<td>32GB</td>
-<td>500GB SSD</td>
-<td>2.5 GbE</td>
-</tr>
-<tr>
-<td>worker-2</td>
-<td>Worker Node</td>
-<td>Ryzen 5 5500U</td>
-<td>32GB</td>
-<td>500GB SSD</td>
-<td>2.5 GbE</td>
-</tr>
-</tbody>
-</table>
-<h2 id="control-plane-node">Control Plane node<a class="headerlink" href="#control-plane-node" title="Permanent link">&para;</a></h2>
-<p>The control plane is hosted on a dedicated mini-PC.</p>
-<p>Characteristics:
-- Sufficient CPU power for API server, scheduler and controller manager
-- Moderate memory footprint (16 GB is sufficient for a single control plane)
-- SSD storage for etcd and system components
-- Dedicated Ethernet interface</p>
-<p>This node is intentionally not used for application workloads.</p>
-<h2 id="worker-nodes">Worker nodes<a class="headerlink" href="#worker-nodes" title="Permanent link">&para;</a></h2>
-<p>Worker nodes are more powerful and designed to run application workloads.</p>
-<p>Characteristics:
-- Higher CPU core count for parallel workloads
-- More memory for pods and caches
-- Fast local SSD storage
-- Wired Ethernet connectivity</p>
-<p>This allows realistic scheduling, resource limits and scaling experiments.</p>
-<h2 id="networking-hardware">Networking hardware<a class="headerlink" href="#networking-hardware" title="Permanent link">&para;</a></h2>
-<p>All nodes are connected using a dedicated <strong>2.5 GbE Ethernet switch</strong>.</p>
-<p>Design choices:
-- Wired network only (no Wi-Fi)
-- Predictable latency and throughput
-- No network bottlenecks between nodes</p>
-<h2 id="key-hardware-design-decisions">Key hardware design decisions<a class="headerlink" href="#key-hardware-design-decisions" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Single control plane (home lab scope)</li>
-<li>Dedicated nodes (no virtualization)</li>
-<li>Wired Ethernet only</li>
-<li>Over-provisioned worker nodes</li>
-<li>Energy-efficient hardware</li>
-</ul>
+<h1 id="kubernetes-installation-kubeadm-v134">Kubernetes Installation (kubeadm - v1.34)<a class="headerlink" href="#kubernetes-installation-kubeadm-v134" title="Permanent link">&para;</a></h1>
+<p>This section describes how to install Kubernetes components and initialize
+the cluster using <strong>kubeadm</strong>.</p>
+<p>At the end of this section, a <strong>single-node control plane</strong> will be up and running,
+ready to accept worker nodes.</p>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before proceeding, ensure that:
+- the operating system is prepared (see OS Preparation)
+- swap is disabled
+- containerd is running
+- required kernel modules and sysctl parameters are applied</p>
+<p>All commands below must be executed <strong>as root or with sudo</strong>.</p>
+<hr />
+<h2 id="install-kubernetes-packages">Install Kubernetes packages<a class="headerlink" href="#install-kubernetes-packages" title="Permanent link">&para;</a></h2>
+<h3 id="add-kubernetes-apt-repository-v134">Add Kubernetes APT repository (v1.34)<a class="headerlink" href="#add-kubernetes-apt-repository-v134" title="Permanent link">&para;</a></h3>
+<p>Install required packages</p>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+</code></pre>
+<p>Create keyrings directory (if not present)</p>
+<pre><code class="language-bash">sudo mkdir -p -m 755 /etc/apt/keyrings
+</code></pre>
+<p>Add CPG key</p>
+<pre><code class="language-bash">curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key \
+| sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+</code></pre>
+<p>Add Kubernetes APT repository</p>
+<pre><code class="language-bash">echo &quot;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
+https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /&quot; \
+| sudo tee /etc/apt/sources.list.d/kubernetes.list
+</code></pre>
+<p>Update package index</p>
+<pre><code class="language-bash">sudo apt-get update
+</code></pre>
+<hr />
+<h3 id="install-kubernetes-components-pinned-version">Install Kubernetes components (pinned version)<a class="headerlink" href="#install-kubernetes-components-pinned-version" title="Permanent link">&para;</a></h3>
+<p>Select the Kubernetes version to install:</p>
+<pre><code class="language-bash">apt-cache madison kubeadm
+</code></pre>
+<p>Expected output:</p>
+<pre><code class="language-bash">kubeadm | 1.34.3-1.1 | https://pkgs.k8s.io/core:/stable:/v1.34/deb  Packages
+kubeadm | 1.34.2-1.1 | https://pkgs.k8s.io/core:/stable:/v1.34/deb  Packages
+kubeadm | 1.34.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.34/deb  Packages
+kubeadm | 1.34.0-1.1 | https://pkgs.k8s.io/core:/stable:/v1.34/deb  Packages
+</code></pre>
+<p>Install kubeadm, kubelet and kubectl using the selected version
+(example: 1.34.3-1.1):</p>
+<pre><code class="language-bash">sudo apt-get install -y \
+kubelet=1.34.3-1.1 \
+kubeadm=1.34.3-1.1 \
+kubectl=1.34.3-1.1
+</code></pre>
+<p>Hold package versions</p>
+<p>Prevent automatic upgrades to avoid version drift:</p>
+<pre><code class="language-bash">sudo apt-mark hold kubelet kubeadm kubectl
+</code></pre>
+<hr />
+<h3 id="verify-installation">Verify installation<a class="headerlink" href="#verify-installation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubeadm version
+kubectl version --client
+kubelet --version
+</code></pre>
+<p>Expected output:
+- all components report v1.34.x</p>
+<hr />
+<h3 id="configure-kubelet">Configure kubelet<a class="headerlink" href="#configure-kubelet" title="Permanent link">&para;</a></h3>
+<p>Ensure kubelet uses the systemd cgroup driver, matching containerd.
+This is already handled by containerd configuration, but kubelet must be restarted:</p>
+<pre><code class="language-bash">sudo systemctl daemon-reexec
+sudo systemctl restart kubelet
+</code></pre>
+<p>At this point, kubelet will fail to start until the cluster is initialized.
+This is expected behavior.</p>
+<hr />
+<h3 id="initialize-the-control-plane">Initialize the control plane<a class="headerlink" href="#initialize-the-control-plane" title="Permanent link">&para;</a></h3>
+<p>Run the following command on the control plane node only:</p>
+<pre><code class="language-bash">sudo kubeadm init \
+--apiserver-advertise-address=192.168.1.53 \
+--pod-network-cidr=10.244.0.0/16
+</code></pre>
+<p>The Pod CIDR must match the CNI configuration that will be installed later.</p>
+<hr />
+<h3 id="save-the-join-command">Save the join command<a class="headerlink" href="#save-the-join-command" title="Permanent link">&para;</a></h3>
+<p>At the end of the output, kubeadm prints a kubeadm join command.</p>
+<p>⚠️ Save this command — it will be required to join worker nodes later.</p>
+<hr />
+<h3 id="configure-kubectl-access">Configure kubectl access<a class="headerlink" href="#configure-kubectl-access" title="Permanent link">&para;</a></h3>
+<p>Configure kubectl for the current user:</p>
+<pre><code class="language-bash">mkdir -p $HOME/.kube
+sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre>
+<p>Verify access:</p>
+<pre><code class="language-bash">kubectl get nodes
+</code></pre>
+<hr />
+<h3 id="verify-control-plane-status">Verify control plane status<a class="headerlink" href="#verify-control-plane-status" title="Permanent link">&para;</a></h3>
+<p>Check core components:</p>
+<pre><code class="language-bash">kubectl get pods -n kube-system
+</code></pre>
+<p>Expected state:
+- kube-apiserver running
+- kube-controller-manager running
+- kube-scheduler running
+- etcd running</p>
+<p>Some pods may be in Pending state until a CNI is installed — this is normal.</p>
 
 
 
