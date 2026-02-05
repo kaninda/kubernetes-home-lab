@@ -13,10 +13,8 @@
       
       
       
-        <link rel="prev" href="../kubernetes-install/">
+        <link rel="prev" href="../cni-calico/">
       
-      
-        <link rel="next" href="../worker-join/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>CNI (Calico) - Kubernetes Home Lab</title>
+        <title>Join Workers - Kubernetes Home Lab</title>
       
     
     
@@ -78,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cni-installation-calico" class="md-skip">
+        <a href="#join-worker-nodes" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CNI (Calico)
+              Join Workers
             
           </span>
         </div>
@@ -450,6 +448,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../cni-calico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNI (Calico)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -469,7 +495,7 @@
   <span class="md-ellipsis">
     
   
-    CNI (Calico)
+    Join Workers
   
 
     
@@ -487,7 +513,7 @@
   <span class="md-ellipsis">
     
   
-    CNI (Calico)
+    Join Workers
   
 
     
@@ -521,14 +547,25 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Prerequisites">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retrieve-the-join-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retrieve the join command
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrieve the join command">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#verify-current-node-status" class="md-nav__link">
+  <a href="#example-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify current node status:
+        Example output:
       
     </span>
   </a>
@@ -541,10 +578,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#network-design-assumptions" class="md-nav__link">
+  <a href="#this-command-is-unique-and-time-limited" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Network design assumptions
+        ⚠️ This command is unique and time-limited.
       
     </span>
   </a>
@@ -552,55 +589,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-pod-network-cidr-must-match-the-value-provided-during-kubeadm-init" class="md-nav__link">
+  <a href="#join-worker-nodes_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ The Pod Network CIDR must match the value provided during kubeadm init.
+        Join worker nodes
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-calico" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why Calico
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logical-pod-network-topology-calico" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logical Pod Network topology (Calico)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-calico" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install Calico
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Install Calico">
+    <nav class="md-nav" aria-label="Join worker nodes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#download-the-calico-manifest" class="md-nav__link">
+  <a href="#execute-on-each-worker-node" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download the Calico manifest
+        Execute on each worker node
       
     </span>
   </a>
@@ -608,49 +612,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#this-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apply-the-manifest" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Apply the manifest
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-calico-deployment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify Calico deployment
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Verify Calico deployment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#check-calico-pods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Check Calico pods:
+        This command:
       
     </span>
   </a>
@@ -658,10 +623,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#expected-output" class="md-nav__link">
+  <a href="#verify-node-registration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Expected output:
+        Verify node registration
       
     </span>
   </a>
@@ -685,33 +650,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-node-readiness" class="md-nav__link">
+  <a href="#verify-pod-scheduling-across-nodes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify node readiness
+        Verify Pod scheduling across nodes
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-pod-networking" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify Pod networking
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Verify Pod networking">
+    <nav class="md-nav" aria-label="Verify Pod scheduling across nodes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#deploy-a-simple-test-pod" class="md-nav__link">
+  <a href="#deploy-a-test-pod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deploy a simple test Pod:
+        Deploy a test Pod:
       
     </span>
   </a>
@@ -719,10 +673,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verify-pod-status" class="md-nav__link">
+  <a href="#check-where-the-pod-is-scheduled" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify Pod status:
+        Check where the Pod is scheduled:
       
     </span>
   </a>
@@ -734,17 +688,6 @@
     <span class="md-ellipsis">
       
         Expected:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#optional-check-pod-ip" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        (Optional) Check Pod IP:
       
     </span>
   </a>
@@ -768,6 +711,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-stays-in-notready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node stays in NotReady
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join-token-expired" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join token expired
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Join token expired">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-a-new-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate a new token:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#result" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -777,39 +771,16 @@
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../worker-join/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Join Workers
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -867,108 +838,24 @@
 
 
 
-<h1 id="cni-installation-calico">CNI Installation (Calico)<a class="headerlink" href="#cni-installation-calico" title="Permanent link">&para;</a></h1>
-<p>This section describes how to install Calico as the Container Network Interface (CNI)
-for the Kubernetes Home Lab.</p>
-<p>Calico is responsible for:
-- Pod-to-Pod networking across nodes
-- Pod IP address allocation
-- Network routing and encapsulation
-- Network policy enforcement (optional, later)</p>
+<h1 id="join-worker-nodes">Join Worker Nodes<a class="headerlink" href="#join-worker-nodes" title="Permanent link">&para;</a></h1>
+<p>This section describes how to join worker nodes to the Kubernetes cluster
+using <strong>kubeadm join</strong>.</p>
+<p>At the end of this section:
+- all worker nodes will be part of the cluster
+- nodes will be in <code>Ready</code> state
+- Pod networking will work across nodes</p>
 <hr />
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>Before installing Calico, ensure that:</p>
+<p>Before joining worker nodes, ensure that:</p>
 <ul>
-<li>the Kubernetes control plane is initialized</li>
-<li>kubectl access is configured</li>
-<li>all nodes are in NotReady state (expected before CNI installation)</li>
+<li>Kubernetes control plane is initialized</li>
+<li>Calico CNI is installed and running</li>
+<li><code>kubeadm join</code> command is available</li>
+<li>Worker nodes completed <strong>OS Preparation</strong></li>
+<li>Kubernetes packages are installed on worker nodes</li>
 </ul>
-<h3 id="verify-current-node-status">Verify current node status:<a class="headerlink" href="#verify-current-node-status" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get nodes
-</code></pre>
-<p>Expected output:</p>
-<ul>
-<li>Control plane node is present</li>
-<li>Status is NotReady</li>
-</ul>
-<hr />
-<h2 id="network-design-assumptions">Network design assumptions<a class="headerlink" href="#network-design-assumptions" title="Permanent link">&para;</a></h2>
-<p>This lab uses the following network ranges:</p>
-<table>
-<thead>
-<tr>
-<th>Network type</th>
-<th>CIDR</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Home LAN</td>
-<td>192.168.1.0/24</td>
-</tr>
-<tr>
-<td>Pod Network</td>
-<td>10.244.0.0/16</td>
-</tr>
-</tbody>
-</table>
-<h2 id="the-pod-network-cidr-must-match-the-value-provided-during-kubeadm-init">⚠️ The Pod Network CIDR must match the value provided during kubeadm init.<a class="headerlink" href="#the-pod-network-cidr-must-match-the-value-provided-during-kubeadm-init" title="Permanent link">&para;</a></h2>
-<h2 id="why-calico">Why Calico<a class="headerlink" href="#why-calico" title="Permanent link">&para;</a></h2>
-<p>Calico was selected for this home lab because it provides:</p>
-<ul>
-<li>Native Kubernetes networking (no overlay requirement)</li>
-<li>High performance and low overhead</li>
-<li>Optional encapsulation (IP-in-IP or VXLAN)</li>
-<li>First-class support for NetworkPolicies</li>
-<li>Production-grade behavior while remaining simple to operate</li>
-</ul>
-<hr />
-<h2 id="logical-pod-network-topology-calico">Logical Pod Network topology (Calico)<a class="headerlink" href="#logical-pod-network-topology-calico" title="Permanent link">&para;</a></h2>
-<p>This diagram represents the <strong>logical networking model</strong> once Calico is installed.</p>
-<ul>
-<li>Each node is assigned a Pod CIDR</li>
-<li>Pods receive IPs from the Pod Network range</li>
-<li>Calico routes Pod traffic between nodes</li>
-<li>No NAT is required between Pods</li>
-</ul>
-<p><img alt="cni-calico" src="../diagrams/cni-calico.svg" width="80%" /></p>
-<hr />
-<h2 id="install-calico">Install Calico<a class="headerlink" href="#install-calico" title="Permanent link">&para;</a></h2>
-<p>Calico is installed by applying the official manifest.</p>
-<h3 id="download-the-calico-manifest">Download the Calico manifest<a class="headerlink" href="#download-the-calico-manifest" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.27.3/manifests/calico.yaml
-</code></pre>
-<h3 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>(Optional) Review the manifest:</p>
-<pre><code class="language-bash">less calico.yaml
-</code></pre>
-<hr />
-<h2 id="apply-the-manifest">Apply the manifest<a class="headerlink" href="#apply-the-manifest" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">kubectl apply -f calico.yaml
-</code></pre>
-<p>This will deploy:</p>
-<ul>
-<li>calico-node (DaemonSet)</li>
-<li>calico-kube-controllers</li>
-<li>required CRDs and RBAC rules</li>
-</ul>
-<hr />
-<h2 id="verify-calico-deployment">Verify Calico deployment<a class="headerlink" href="#verify-calico-deployment" title="Permanent link">&para;</a></h2>
-<h3 id="check-calico-pods">Check Calico pods:<a class="headerlink" href="#check-calico-pods" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get pods -n kube-system
-</code></pre>
-<h3 id="expected-output">Expected output:<a class="headerlink" href="#expected-output" title="Permanent link">&para;</a></h3>
-<ul>
-<li>calico-node pods running on all nodes</li>
-<li>calico-kube-controllers running</li>
-</ul>
-<h3 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">calico-node-xxxxx            Running
-calico-kube-controllers      Running
-</code></pre>
-<hr />
-<h2 id="verify-node-readiness">Verify node readiness<a class="headerlink" href="#verify-node-readiness" title="Permanent link">&para;</a></h2>
-<p>Once Calico is running, nodes should transition to Ready.</p>
+<p>Verify cluster status on the control plane:</p>
 <pre><code class="language-bash">kubectl get nodes
 </code></pre>
 <p>Expected output:</p>
@@ -976,31 +863,85 @@ calico-kube-controllers      Running
 <li>control plane node is Ready</li>
 </ul>
 <hr />
-<h2 id="verify-pod-networking">Verify Pod networking<a class="headerlink" href="#verify-pod-networking" title="Permanent link">&para;</a></h2>
-<h3 id="deploy-a-simple-test-pod">Deploy a simple test Pod:<a class="headerlink" href="#deploy-a-simple-test-pod" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl run test-pod --image=busybox --restart=Never -- sleep 3600
+<h2 id="retrieve-the-join-command">Retrieve the join command<a class="headerlink" href="#retrieve-the-join-command" title="Permanent link">&para;</a></h2>
+<p>On the control plane node, retrieve (or regenerate) the join command:</p>
+<pre><code class="language-bash">sudo kubeadm token create --print-join-command
 </code></pre>
-<h3 id="verify-pod-status">Verify Pod status:<a class="headerlink" href="#verify-pod-status" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get pods
+<h3 id="example-output">Example output:<a class="headerlink" href="#example-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubeadm join 192.168.1.53:6443 \
+--token abcdef.0123456789abcdef \
+--discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</code></pre>
+<h2 id="this-command-is-unique-and-time-limited">⚠️ This command is unique and time-limited.<a class="headerlink" href="#this-command-is-unique-and-time-limited" title="Permanent link">&para;</a></h2>
+<h2 id="join-worker-nodes_1">Join worker nodes<a class="headerlink" href="#join-worker-nodes_1" title="Permanent link">&para;</a></h2>
+<h3 id="execute-on-each-worker-node">Execute on each worker node<a class="headerlink" href="#execute-on-each-worker-node" title="Permanent link">&para;</a></h3>
+<p>Run the kubeadm join command on each worker node only:</p>
+<pre><code class="language-bash">sudo kubeadm join 192.168.1.53:6443 \
+--token abcdef.0123456789abcdef \
+--discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</code></pre>
+<h3 id="this-command">This command:<a class="headerlink" href="#this-command" title="Permanent link">&para;</a></h3>
+<ul>
+<li>registers the node with the API server</li>
+<li>installs required certificates</li>
+<li>starts kubelet on the worker node</li>
+</ul>
+<hr />
+<h3 id="verify-node-registration">Verify node registration<a class="headerlink" href="#verify-node-registration" title="Permanent link">&para;</a></h3>
+<p>On the control plane, verify node status:</p>
+<pre><code class="language-bash">kubectl get nodes
+</code></pre>
+<p>Expected output:</p>
+<ul>
+<li>control plane node: Ready</li>
+<li>worker nodes: Ready</li>
+</ul>
+<h3 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">NAME        STATUS   ROLES           AGE     VERSION
+cp-1        Ready    control-plane   20m     v1.34.x
+worker-1    Ready    &lt;none&gt;           2m     v1.34.x
+worker-2    Ready    &lt;none&gt;           2m     v1.34.x
+</code></pre>
+<hr />
+<h2 id="verify-pod-scheduling-across-nodes">Verify Pod scheduling across nodes<a class="headerlink" href="#verify-pod-scheduling-across-nodes" title="Permanent link">&para;</a></h2>
+<h3 id="deploy-a-test-pod">Deploy a test Pod:<a class="headerlink" href="#deploy-a-test-pod" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl run nginx-test --image=nginx --restart=Never
+</code></pre>
+<h3 id="check-where-the-pod-is-scheduled">Check where the Pod is scheduled:<a class="headerlink" href="#check-where-the-pod-is-scheduled" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl get pod nginx-test -o wide
 </code></pre>
 <h3 id="expected">Expected:<a class="headerlink" href="#expected" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Pod is Running</li>
+<li>Pod is scheduled on a worker node</li>
+<li>Pod has an IP from the Pod CIDR range</li>
 </ul>
-<h3 id="optional-check-pod-ip">(Optional) Check Pod IP:<a class="headerlink" href="#optional-check-pod-ip" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get pod test-pod -o wide
-</code></pre>
 <hr />
 <h2 id="cleanup-test-pod">Cleanup test Pod<a class="headerlink" href="#cleanup-test-pod" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">kubectl delete pod test-pod
+<pre><code class="language-bash">kubectl delete pod nginx-test
 </code></pre>
 <hr />
-<h2 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h2>
+<h2 id="common-issues">Common issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h2>
+<h3 id="node-stays-in-notready">Node stays in NotReady<a class="headerlink" href="#node-stays-in-notready" title="Permanent link">&para;</a></h3>
+<p>Check CNI status:</p>
+<pre><code class="language-bash">kubectl get pods -n kube-system
+</code></pre>
+<p>Ensure:</p>
+<ul>
+<li>calico-node is running on the worker node</li>
+<li>no CrashLoopBackOff</li>
+</ul>
+<hr />
+<h2 id="join-token-expired">Join token expired<a class="headerlink" href="#join-token-expired" title="Permanent link">&para;</a></h2>
+<h3 id="generate-a-new-token">Generate a new token:<a class="headerlink" href="#generate-a-new-token" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">sudo kubeadm token create --print-join-command
+</code></pre>
+<h3 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h3>
 <p>At this stage:</p>
 <ul>
-<li>Calico is installed and operational</li>
-<li>Pod networking is functional</li>
-<li>The cluster is ready to accept worker nodes</li>
+<li>all nodes are successfully joined</li>
+<li>Pod networking works across nodes</li>
+<li>the Kubernetes cluster is fully operational</li>
 </ul>
 
 
