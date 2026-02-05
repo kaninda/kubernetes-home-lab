@@ -148,6 +148,13 @@ Check core components:
 ```bash
 kubectl get pods -n kube-system
 ```
+Expected state:
+- kube-apiserver running
+- kube-controller-manager running
+- kube-scheduler running
+- etcd running
+
+Some pods may be in Pending state until a CNI is installed — this is normal.
 
 
 
