@@ -16,6 +16,8 @@
         <link rel="prev" href="../os-preparation/">
       
       
+        <link rel="next" href="../cni-calico/">
+      
       
         
       
@@ -614,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cni-calico.md" class="md-nav__link">
+      <a href="../cni-calico/" class="md-nav__link">
         
   
   
@@ -816,11 +818,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 <p>Check core components:</p>
 <pre><code class="language-bash">kubectl get pods -n kube-system
 </code></pre>
-<p>Expected state:
-- kube-apiserver running
-- kube-controller-manager running
-- kube-scheduler running
-- etcd running</p>
+<p>Expected state:</p>
+<ul>
+<li>kube-apiserver running</li>
+<li>kube-controller-manager running</li>
+<li>kube-scheduler running</li>
+<li>etcd running</li>
+</ul>
 <p>Some pods may be in Pending state until a CNI is installed — this is normal.</p>
 
 
