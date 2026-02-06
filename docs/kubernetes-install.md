@@ -97,15 +97,20 @@ Expected output:
 ---
 ### Configure kubelet
 
-Ensure kubelet uses the systemd cgroup driver, matching containerd.
-This is already handled by containerd configuration, but kubelet must be restarted:
+### Kubelet behavior before cluster initialization
 
-```bash
-sudo systemctl daemon-reexec
-sudo systemctl restart kubelet
-```
-At this point, kubelet will fail to start until the cluster is initialized.
-This is expected behavior.
+At this stage, kubelet is installed but the cluster is not yet initialized.
+
+It is expected that:
+
+- kubelet is running
+- kubelet repeatedly fails and retries
+- the node is not yet registered in the cluster
+
+This behavior is normal and will be resolved automatically
+after running `kubeadm init`.
+
+No manual kubelet configuration is required.
 
 ---
 
