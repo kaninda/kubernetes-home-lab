@@ -49,6 +49,11 @@ free -h
 ```
 Expected output: Swap: 0B
 
+```bash
+swapon --show
+```
+Expected no output
+
 ---
 
 ## Load required kernel modules
