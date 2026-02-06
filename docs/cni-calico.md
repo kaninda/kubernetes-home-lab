@@ -67,9 +67,9 @@ This diagram represents the **logical networking model** once Calico is installe
 ## Install Calico
 Calico is installed by applying the official manifest.
 
-### Download the Calico manifest
+### Download the Calico manifest compatible with k8s 1.34
 ``` bash
-curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.27.3/manifests/calico.yaml
+curl -LO https://raw.githubusercontent.com/projectcalico/calico/release-v3.31/manifests/calico.yaml
 ```
 ###
 (Optional) Review the manifest:
