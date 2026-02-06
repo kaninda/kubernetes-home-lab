@@ -552,6 +552,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#kubelet-behavior-before-cluster-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubelet behavior before cluster initialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#initialize-the-control-plane" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -812,13 +823,17 @@ kubelet --version
 - all components report v1.34.x</p>
 <hr />
 <h3 id="configure-kubelet">Configure kubelet<a class="headerlink" href="#configure-kubelet" title="Permanent link">&para;</a></h3>
-<p>Ensure kubelet uses the systemd cgroup driver, matching containerd.
-This is already handled by containerd configuration, but kubelet must be restarted:</p>
-<pre><code class="language-bash">sudo systemctl daemon-reexec
-sudo systemctl restart kubelet
-</code></pre>
-<p>At this point, kubelet will fail to start until the cluster is initialized.
-This is expected behavior.</p>
+<h3 id="kubelet-behavior-before-cluster-initialization">Kubelet behavior before cluster initialization<a class="headerlink" href="#kubelet-behavior-before-cluster-initialization" title="Permanent link">&para;</a></h3>
+<p>At this stage, kubelet is installed but the cluster is not yet initialized.</p>
+<p>It is expected that:</p>
+<ul>
+<li>kubelet is running</li>
+<li>kubelet repeatedly fails and retries</li>
+<li>the node is not yet registered in the cluster</li>
+</ul>
+<p>This behavior is normal and will be resolved automatically
+after running <code>kubeadm init</code>.</p>
+<p>No manual kubelet configuration is required.</p>
 <hr />
 <h3 id="initialize-the-control-plane">Initialize the control plane<a class="headerlink" href="#initialize-the-control-plane" title="Permanent link">&para;</a></h3>
 <p>Run the following command on the control plane node only:</p>
