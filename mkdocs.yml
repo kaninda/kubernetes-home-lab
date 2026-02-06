@@ -46,3 +46,4 @@ nav:
       - CNI (Calico): cni-calico.md
       - Join Workers: worker-join.md
       - Validation: validation.md
+      - Kubernetes Reset: kubernetes-reset.md
