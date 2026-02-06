@@ -932,6 +932,9 @@ The <strong>kubelet will refuse to start</strong> if swap is enabled.</p>
 <pre><code class="language-bash">free -h
 </code></pre>
 <p>Expected output: Swap: 0B</p>
+<pre><code class="language-bash">swapon --show
+</code></pre>
+<p>Expected no output</p>
 <hr />
 <h2 id="load-required-kernel-modules">Load required kernel modules<a class="headerlink" href="#load-required-kernel-modules" title="Permanent link">&para;</a></h2>
 <p>Kubernetes networking requires specific kernel modules.</p>
