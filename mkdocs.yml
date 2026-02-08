@@ -5,21 +5,44 @@ site_author: Arnaud
 theme:
   name: material
   language: en
+
   features:
+    - navigation.tabs              # 🔥 menu horizontal
+    - navigation.tabs.sticky       # onglets toujours visibles
+    - navigation.sections          # groupes dans la sidebar
+    - navigation.expand            # tout ouvert par défaut
     - navigation.instant
-    - navigation.sections
-    - navigation.expand
     - navigation.top
     - toc.integrate
     - search.highlight
     - search.suggest
+    - content.code.copy            # bouton copier sur le code
+
   palette:
-    - scheme: default
+    # Auto (système)
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch theme
+
+    # Light
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: blue
       accent: indigo
-    - scheme: slate
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Dark
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
       primary: blue
       accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
 
 markdown_extensions:
   - admonition
@@ -27,8 +50,8 @@ markdown_extensions:
   - footnotes
   - pymdownx.details
   - pymdownx.highlight
-  - pymdownx.tabbed
   - pymdownx.inlinehilite
+  - pymdownx.tabbed
   - toc:
       permalink: true
 
@@ -37,13 +60,18 @@ plugins:
 
 nav:
   - Home: index.md
-  - Documentation:
-      - Overview: overview.md
+
+  - Overview:
+      - Introduction: overview.md
       - Hardware: hardware.md
       - Network Topology: network-topology.md
+
+  - Installation:
       - OS Preparation: os-preparation.md
       - Kubernetes Installation (kubeadm): kubernetes-install.md
       - CNI (Calico): cni-calico.md
       - Join Workers: worker-join.md
+
+  - Operations:
       - Validation: validation.md
       - Kubernetes Reset: kubernetes-reset.md
