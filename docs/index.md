@@ -6,6 +6,7 @@ This site documents the design and installation of a **bare-metal Kubernetes clu
 built at home using **kubeadm**.
 
 The goal of this project is to:
+
 - learn Kubernetes internals
 - build a realistic bare-metal cluster
 - document every step for reproducibility
