@@ -1,6 +1,10 @@
 site_name: Kubernetes Home Lab
 site_description: Bare-metal Kubernetes home lab documentation
-site_author: Arnaud
+site_author: Arnaud Kaninda
+docs_dir: src
+site_dir: site
+repo_url: https://github.com/kaninda/kubernetes-home-lab
+repo_name: kaninda/kubernetes-home-lab
 
 theme:
   name: material
@@ -17,6 +21,8 @@ theme:
     - search.highlight
     - search.suggest
     - content.code.copy            # bouton copier sur le code
+    - content.action.edit
+    - content.action.view
 
   palette:
     # Auto (système)
