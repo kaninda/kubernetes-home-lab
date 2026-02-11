@@ -71,12 +71,24 @@ nav:
       - Introduction: overview.md
       - Hardware: hardware.md
       - Network Topology: network-topology.md
+      - Logical Architecture: logical-architecture.md
 
-  - Installation:
+  - Core Installation:
       - OS Preparation: os-preparation.md
       - Kubernetes Installation (kubeadm): kubernetes-install.md
       - CNI (Calico): cni-calico.md
       - Join Workers: worker-join.md
+
+  - Networking & Exposure:
+      - Gateway API: gateway-api.md
+      - NGINX Gateway Fabric: nginx-gateway.md
+      - Cloudflare Tunnel: cloudflare-tunnel.md
+      - DNS & Domain Setup: dns-setup.md
+
+  - GitOps:
+      - ArgoCD Installation: argocd-install.md
+      - ArgoCD Exposure via Gateway: argocd-exposure.md
+      - GitOps Workflow: gitops-workflow.md
 
   - Operations:
       - Validation: validation.md
