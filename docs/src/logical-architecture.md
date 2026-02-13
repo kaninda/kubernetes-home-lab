@@ -1,0 +1,1 @@
+![overview](diagrams/logical-architecture.svg){ width="40%" }
