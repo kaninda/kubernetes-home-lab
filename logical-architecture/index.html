@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#logical-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -575,6 +580,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logical Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -592,6 +617,224 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-level-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Level Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudflare-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cloudflare DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudflare-tunnel-cloudflared" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cloudflare Tunnel (cloudflared)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gateway-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gateway API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx-gateway-fabric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NGINX Gateway Fabric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPRoute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traffic-flow-detailed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traffic Flow (Detailed)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design Decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-loadbalancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No LoadBalancer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gateway-api-instead-of-ingress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gateway API instead of Ingress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outbound-only-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outbound-only connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separation-of-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separation of concerns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1489,179 @@
   
 
 
-  <h1>Logical Architecture</h1>
-
+<h1 id="logical-architecture">Logical Architecture<a class="headerlink" href="#logical-architecture" title="Permanent link">&para;</a></h1>
+<p>This section describes the <strong>logical architecture</strong> of the Kubernetes Home Lab,
+focusing on traffic flow, component responsibilities, and design decisions.</p>
+<p>Unlike the physical topology, this view focuses on <strong>how components interact</strong>
+to expose services from inside the cluster to external users.</p>
+<hr />
+<h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
+<p>The platform is designed to expose applications securely <strong>without requiring
+public inbound connectivity</strong>.</p>
+<p>Instead of exposing services via public IPs or LoadBalancers, this architecture
+relies on <strong>Cloudflare Tunnel</strong> and <strong>Gateway API</strong>.</p>
 <p><img alt="overview" src="../diagrams/logical-architecture.svg" width="40%" /></p>
+<hr />
+<h2 id="high-level-flow">High-Level Flow<a class="headerlink" href="#high-level-flow" title="Permanent link">&para;</a></h2>
+<p>External traffic follows this path:</p>
+<p><strong>User → Cloudflare DNS → Cloudflare Tunnel → Gateway API → HTTPRoute → Service → Pod</strong></p>
+<hr />
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
+<h3 id="cloudflare-dns">Cloudflare DNS<a class="headerlink" href="#cloudflare-dns" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Public entry point</li>
+<li>Resolves application domain (e.g. argocd.example.com)</li>
+<li>Managed externally via Cloudflare</li>
+</ul>
+<hr />
+<h3 id="cloudflare-tunnel-cloudflared">Cloudflare Tunnel (cloudflared)<a class="headerlink" href="#cloudflare-tunnel-cloudflared" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Runs inside the cluster as a Deployment</li>
+<li>Establishes <strong>outbound-only connections</strong> to Cloudflare</li>
+<li>Eliminates the need for:<ul>
+<li>public IP addresses</li>
+<li>port forwarding</li>
+<li>firewall exposure</li>
+</ul>
+</li>
+</ul>
+<p>➡️ This significantly improves security by avoiding inbound traffic.</p>
+<hr />
+<h3 id="gateway-api">Gateway API<a class="headerlink" href="#gateway-api" title="Permanent link">&para;</a></h3>
+<p>Gateway API provides <strong>Kubernetes-native traffic routing</strong>.</p>
+<p>It replaces traditional Ingress with a more flexible model.</p>
+<p>Main resources:</p>
+<ul>
+<li><strong>GatewayClass</strong> → defines the controller</li>
+<li><strong>Gateway</strong> → entry point (listeners, ports)</li>
+<li><strong>HTTPRoute</strong> → routing rules</li>
+</ul>
+<hr />
+<h3 id="nginx-gateway-fabric">NGINX Gateway Fabric<a class="headerlink" href="#nginx-gateway-fabric" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Implements Gateway API</li>
+<li>Acts as the <strong>data plane</strong></li>
+<li>Routes HTTP traffic to services</li>
+</ul>
+<p>Responsibilities:</p>
+<ul>
+<li>TLS termination (optional)</li>
+<li>Host-based routing</li>
+<li>Path-based routing</li>
+</ul>
+<hr />
+<h3 id="httproute">HTTPRoute<a class="headerlink" href="#httproute" title="Permanent link">&para;</a></h3>
+<p>Defines how traffic is routed:</p>
+<p>Example:</p>
+<pre><code class="language-yaml">hostnames:
+  - argocd.example.com
+</code></pre>
+<p>Routes requests to:
+- Service: argocd-server
+- Port: 80</p>
+<hr />
+<h3 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Expose Kubernetes workloads internally</li>
+<li>Usually of type ClusterIP</li>
+<li>Gateway handles external access</li>
+</ul>
+<hr />
+<h3 id="pods">Pods<a class="headerlink" href="#pods" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Actual application workloads</li>
+<li>Example: ArgoCD server</li>
+</ul>
+<h2 id="traffic-flow-detailed">Traffic Flow (Detailed)<a class="headerlink" href="#traffic-flow-detailed" title="Permanent link">&para;</a></h2>
+<p><strong>User → Cloudflare DNS → Cloudflare Tunnel → Gateway API → HTTPRoute → Service → Pod</strong></p>
+<ol>
+<li>The user sends a request to: https://argocd.example.com</li>
+<li>
+<p>The domain is resolved by <strong>Cloudflare DNS</strong></p>
+</li>
+<li>
+<p>The request is routed through the <strong>Cloudflare edge network</strong></p>
+</li>
+<li>
+<p>Cloudflare forwards the request to the <strong>Cloudflare Tunnel</strong></p>
+</li>
+<li>
+<p>The <strong>cloudflared</strong> agent (running in the cluster) receives the request</p>
+</li>
+<li>
+<p>The request is forwarded to the <strong>Gateway API listener</strong></p>
+</li>
+<li>
+<p>The <strong>HTTPRoute</strong> matches the hostname</p>
+</li>
+<li>
+<p>The request is forwarded to the corresponding <strong>Service</strong></p>
+</li>
+<li>
+<p>The Service forwards traffic to the <strong>Pod</strong></p>
+</li>
+</ol>
+<hr />
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="no-loadbalancer">No LoadBalancer<a class="headerlink" href="#no-loadbalancer" title="Permanent link">&para;</a></h3>
+<p>This lab does not rely on cloud LoadBalancers or MetalLB.</p>
+<p>External exposure is handled via <strong>Cloudflare Tunnel</strong>.</p>
+<hr />
+<h3 id="gateway-api-instead-of-ingress">Gateway API instead of Ingress<a class="headerlink" href="#gateway-api-instead-of-ingress" title="Permanent link">&para;</a></h3>
+<p>Gateway API is used instead of traditional Ingress because:</p>
+<ul>
+<li>More expressive routing model</li>
+<li>Better separation of concerns</li>
+<li>Future Kubernetes standard</li>
+</ul>
+<hr />
+<h3 id="outbound-only-connectivity">Outbound-only connectivity<a class="headerlink" href="#outbound-only-connectivity" title="Permanent link">&para;</a></h3>
+<p>No inbound ports are opened on the network.</p>
+<p>All connections are initiated from inside the cluster via cloudflared.</p>
+<p>This improves security by reducing the attack surface.</p>
+<hr />
+<h3 id="separation-of-concerns">Separation of concerns<a class="headerlink" href="#separation-of-concerns" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cloudflare</td>
+<td>DNS + Edge routing</td>
+</tr>
+<tr>
+<td>cloudflared</td>
+<td>Secure tunnel</td>
+</tr>
+<tr>
+<td>Gateway API</td>
+<td>Routing model</td>
+</tr>
+<tr>
+<td>NGINX Gateway</td>
+<td>Traffic processing</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Workload execution</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="security-model">Security Model<a class="headerlink" href="#security-model" title="Permanent link">&para;</a></h2>
+<ul>
+<li>No public IP exposure on cluster nodes</li>
+<li>No open ports on the router</li>
+<li>All traffic is initiated from inside the cluster</li>
+<li>TLS is terminated at Cloudflare edge (optional)</li>
+</ul>
+<p>This model significantly reduces the attack surface compared to traditional setups.</p>
+<hr />
 
 
 

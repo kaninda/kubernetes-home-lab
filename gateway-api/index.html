@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#gateway-api" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -837,6 +842,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -854,6 +879,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-gateway-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Gateway API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1323,44 @@
   
 
 
-  <h1>Gateway API</h1>
-
-
+<h1 id="gateway-api">Gateway API<a class="headerlink" href="#gateway-api" title="Permanent link">&para;</a></h1>
+<p>This section describes the installation and configuration of <strong>Gateway API</strong>
+used to expose applications inside the Kubernetes cluster.</p>
+<p>Gateway API provides a <strong>modern, flexible alternative to Ingress</strong>, offering
+a more expressive routing model and better separation of concerns.</p>
+<hr />
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Gateway API introduces a set of Kubernetes resources to manage traffic:</p>
+<ul>
+<li><strong>GatewayClass</strong> → defines the controller implementation</li>
+<li><strong>Gateway</strong> → defines entry points (listeners, ports)</li>
+<li><strong>HTTPRoute</strong> → defines routing rules</li>
+</ul>
+<p>This model separates:</p>
+<ul>
+<li>infrastructure (Gateway)</li>
+<li>application routing (HTTPRoute)</li>
+</ul>
+<hr />
+<h2 id="why-gateway-api">Why Gateway API<a class="headerlink" href="#why-gateway-api" title="Permanent link">&para;</a></h2>
+<p>Gateway API was chosen over traditional Ingress because:</p>
+<ul>
+<li>More flexible routing model</li>
+<li>Better separation of responsibilities</li>
+<li>Improved support for multi-team environments</li>
+<li>Considered the future of Kubernetes traffic management</li>
+</ul>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p>Gateway API operates with:</p>
+<ul>
+<li>a <strong>controller</strong> (NGINX Gateway Fabric)</li>
+<li>a <strong>GatewayClass</strong></li>
+<li>one or more <strong>Gateways</strong></li>
+<li>multiple <strong>HTTPRoutes</strong></li>
+</ul>
+<p><strong>GatewayClass → Gateway → HTTPRoute → Service → Pod</strong></p>
+<hr />
 
 
 
