@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#argocd-exposure-via-gateway" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1038,6 +1043,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArgoCD Exposure via Gateway
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1055,6 +1080,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPRoute
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Route
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1345,82 @@
   
 
 
-  <h1>ArgoCD Exposure via Gateway</h1>
-
-
+<h1 id="argocd-exposure-via-gateway">ArgoCD Exposure via Gateway<a class="headerlink" href="#argocd-exposure-via-gateway" title="Permanent link">&para;</a></h1>
+<p>This section describes how <strong>ArgoCD</strong> is exposed externally using <strong>Gateway API</strong>
+and <strong>Cloudflare Tunnel</strong>.</p>
+<p>The ArgoCD UI is accessible at <code>argocd.kanismile.com</code> without any LoadBalancer
+or open inbound port on the cluster.</p>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p>Traffic follows the same pattern as all other services in this lab:</p>
+<pre><code>User → Cloudflare DNS → Cloudflare Tunnel → Gateway API → HTTPRoute → argocd-server
+</code></pre>
+<ul>
+<li>The <code>argocd-server</code> service remains <strong>ClusterIP</strong></li>
+<li>The <strong>NGINX Gateway Fabric</strong> handles routing via the <code>edge-gateway</code></li>
+<li><strong>Cloudflare Tunnel</strong> provides secure external access</li>
+</ul>
+<hr />
+<h2 id="flow-diagram">Flow Diagram<a class="headerlink" href="#flow-diagram" title="Permanent link">&para;</a></h2>
+<p><img alt="overview" src="../diagrams/argocd-exposure-noir.svg" width="100%" /></p>
+<hr />
+<h2 id="httproute">HTTPRoute<a class="headerlink" href="#httproute" title="Permanent link">&para;</a></h2>
+<p>The HTTPRoute is deployed in the <code>argocd</code> namespace and references the shared
+<code>edge-gateway</code> in the <code>nginx-gateway</code> namespace.</p>
+<pre><code class="language-yaml">apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  parentRefs:
+    - name: edge-gateway
+      namespace: nginx-gateway
+  hostnames:
+    - argocd.kanismile.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: argocd-server
+          port: 80
+</code></pre>
+<p>Apply it with:</p>
+<pre><code class="language-bash">kubectl apply -f httproute-argocd.yaml
+</code></pre>
+<hr />
+<h2 id="verify-the-route">Verify the Route<a class="headerlink" href="#verify-the-route" title="Permanent link">&para;</a></h2>
+<p>Check the HTTPRoute status:</p>
+<pre><code class="language-bash">kubectl get httproute argocd -n argocd
+</code></pre>
+<p>Expected output:</p>
+<pre><code>NAME     HOSTNAMES                    AGE
+argocd   [&quot;argocd.kanismile.com&quot;]     ...
+</code></pre>
+<p>Verify it is accepted by the gateway controller:</p>
+<pre><code class="language-bash">kubectl describe httproute argocd -n argocd
+</code></pre>
+<p>Look for:</p>
+<pre><code>Conditions:
+  Type: Accepted    Status: True
+  Type: ResolvedRefs  Status: True
+</code></pre>
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>No Ingress</strong> — Gateway API is used exclusively across the lab</li>
+<li><strong>ClusterIP preserved</strong> — the <code>argocd-server</code> service is not modified</li>
+<li><strong>Shared gateway</strong> — the <code>edge-gateway</code> is reused across all services, avoiding resource duplication</li>
+<li><strong>No TLS at the cluster level</strong> — TLS is terminated at the Cloudflare edge</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+</div>
+<p>The <code>edge-gateway</code> is defined in the <code>nginx-gateway</code> namespace and is shared
+across all HTTPRoutes in the lab. See the <a href="../nginx-gateway/">NGINX Gateway Fabric</a> section for details.</p>
+<hr />
 
 
 

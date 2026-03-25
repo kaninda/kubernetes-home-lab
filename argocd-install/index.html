@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#argocd-installation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1010,6 +1015,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArgoCD Installation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1027,6 +1052,108 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-the-namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create the namespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-the-official-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply the official manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#components-installed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Components Installed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1373,97 @@
   
 
 
-  <h1>ArgoCD Installation</h1>
-
-
+<h1 id="argocd-installation">ArgoCD Installation<a class="headerlink" href="#argocd-installation" title="Permanent link">&para;</a></h1>
+<p>This section describes how <strong>ArgoCD v3.3.0</strong> was installed on the Kubernetes Home Lab
+using the official vanilla manifest.</p>
+<p>ArgoCD is a <strong>declarative GitOps continuous delivery tool</strong> for Kubernetes.
+It monitors a Git repository and automatically syncs the desired state to the cluster.</p>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A running Kubernetes cluster</li>
+<li><code>kubectl</code> configured with access to the cluster</li>
+<li>Sufficient permissions to create namespaces and cluster-wide resources</li>
+</ul>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<h3 id="create-the-namespace">Create the namespace<a class="headerlink" href="#create-the-namespace" title="Permanent link">&para;</a></h3>
+<p>ArgoCD runs in its own dedicated namespace:</p>
+<pre><code class="language-bash">kubectl create namespace argocd
+</code></pre>
+<hr />
+<h3 id="apply-the-official-manifest">Apply the official manifest<a class="headerlink" href="#apply-the-official-manifest" title="Permanent link">&para;</a></h3>
+<p>The installation uses the official upstream manifest for <strong>ArgoCD v3.3.0</strong>:</p>
+<pre><code class="language-bash">kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.3.0/manifests/install.yaml
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>This installs ArgoCD with all default components.
+No Helm chart or Kustomize overlay is used.</p>
+<hr />
+<h3 id="verify-the-installation">Verify the installation<a class="headerlink" href="#verify-the-installation" title="Permanent link">&para;</a></h3>
+<p>Wait for all pods to be in <code>Running</code> state:</p>
+<pre><code class="language-bash">kubectl get pods -n argocd
+</code></pre>
+<p>Expected output:</p>
+<pre><code>NAME                                                  READY   STATUS    RESTARTS   AGE
+argocd-application-controller-0                       1/1     Running   0          ...
+argocd-dex-server-xxxx                                1/1     Running   0          ...
+argocd-notifications-controller-xxxx                  1/1     Running   0          ...
+argocd-redis-xxxx                                     1/1     Running   0          ...
+argocd-repo-server-xxxx                               1/1     Running   0          ...
+argocd-server-xxxx                                    1/1     Running   0          ...
+</code></pre>
+<hr />
+<h2 id="components-installed">Components Installed<a class="headerlink" href="#components-installed" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>argocd-server</code></td>
+<td>Main API server and Web UI</td>
+</tr>
+<tr>
+<td><code>argocd-application-controller</code></td>
+<td>Reconciles cluster state with Git</td>
+</tr>
+<tr>
+<td><code>argocd-repo-server</code></td>
+<td>Clones and renders Git repositories</td>
+</tr>
+<tr>
+<td><code>argocd-dex-server</code></td>
+<td>Handles SSO and authentication</td>
+</tr>
+<tr>
+<td><code>argocd-redis</code></td>
+<td>Caching layer</td>
+</tr>
+<tr>
+<td><code>argocd-notifications-controller</code></td>
+<td>Sends notifications on sync events</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+</div>
+<p>All services are of type <strong>ClusterIP</strong>.
+External access is handled separately via Gateway API and Cloudflare Tunnel.</p>
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Vanilla install</strong> — no Helm, no Kustomize, keeping the setup simple and auditable</li>
+<li><strong>ClusterIP only</strong> — no LoadBalancer or NodePort, external exposure is managed at the Gateway layer</li>
+<li><strong>v3.3.0</strong> — pinned version for reproducibility</li>
+</ul>
+<hr />
 
 
 

@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#gitops-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1066,6 +1071,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitOps Workflow
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1083,6 +1108,119 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Concept
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-define-the-desired-state-in-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Define the desired state in Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-an-argocd-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create an ArgoCD Application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-argocd-syncs-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. ArgoCD syncs the cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sync-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sync Policies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-sync-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify Sync Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1384,115 @@
   
 
 
-  <h1>GitOps Workflow</h1>
-
-
+<h1 id="gitops-workflow">GitOps Workflow<a class="headerlink" href="#gitops-workflow" title="Permanent link">&para;</a></h1>
+<p>This section describes the <strong>GitOps workflow</strong> used in this lab to deploy
+and manage Kubernetes workloads via ArgoCD.</p>
+<p>The core principle is simple: <strong>Git is the single source of truth</strong>.
+Any change to the cluster must go through a Git commit.</p>
+<hr />
+<h2 id="core-concept">Core Concept<a class="headerlink" href="#core-concept" title="Permanent link">&para;</a></h2>
+<p><img alt="overview" src="../diagrams/gitops-workflow.svg" width="100%" /></p>
+<ul>
+<li><strong>No manual <code>kubectl apply</code></strong> for application deployments</li>
+<li>ArgoCD continuously reconciles the <strong>desired state</strong> (Git) with the <strong>actual state</strong> (cluster)</li>
+<li>Any drift is detected and can be corrected automatically</li>
+</ul>
+<hr />
+<h2 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h2>
+<h3 id="1-define-the-desired-state-in-git">1. Define the desired state in Git<a class="headerlink" href="#1-define-the-desired-state-in-git" title="Permanent link">&para;</a></h3>
+<p>All Kubernetes manifests (Deployments, Services, ConfigMaps, HTTPRoutes, etc.)
+are stored in a Git repository.</p>
+<pre><code>kubernetes-home-lab/
+├── apps/
+│   ├── my-app/
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   └── httproute.yaml
+</code></pre>
+<hr />
+<h3 id="2-create-an-argocd-application">2. Create an ArgoCD Application<a class="headerlink" href="#2-create-an-argocd-application" title="Permanent link">&para;</a></h3>
+<p>An <strong>Application</strong> resource tells ArgoCD where to find the manifests
+and where to deploy them:</p>
+<pre><code class="language-yaml">apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kaninda/kubernetes-home-lab
+    targetRevision: HEAD
+    path: apps/my-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+</code></pre>
+<p>Apply it with:</p>
+<pre><code class="language-bash">kubectl apply -f apps/my-app/application.yaml
+</code></pre>
+<hr />
+<h3 id="3-argocd-syncs-the-cluster">3. ArgoCD syncs the cluster<a class="headerlink" href="#3-argocd-syncs-the-cluster" title="Permanent link">&para;</a></h3>
+<p>ArgoCD detects the new Application and reconciles the cluster state:</p>
+<ul>
+<li>Pulls the manifests from the Git repository</li>
+<li>Applies them to the target namespace</li>
+<li>Reports the sync status in the UI</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p>With <code>automated</code> sync policy enabled, ArgoCD will automatically apply
+any new commit to the target branch — no manual intervention needed.</p>
+<hr />
+<h2 id="sync-policies">Sync Policies<a class="headerlink" href="#sync-policies" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Policy</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>automated</code></td>
+<td>Automatically syncs on every Git change</td>
+</tr>
+<tr>
+<td><code>prune: true</code></td>
+<td>Deletes resources removed from Git</td>
+</tr>
+<tr>
+<td><code>selfHeal: true</code></td>
+<td>Reverts manual changes made directly to the cluster</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>With <code>selfHeal: true</code>, any manual <code>kubectl apply</code> or <code>kubectl delete</code>
+will be reverted by ArgoCD on the next reconciliation loop.</p>
+<hr />
+<h2 id="verify-sync-status">Verify Sync Status<a class="headerlink" href="#verify-sync-status" title="Permanent link">&para;</a></h2>
+<p>Check the application status via CLI:</p>
+<pre><code class="language-bash">kubectl get application -n argocd
+</code></pre>
+<p>Or open the ArgoCD UI at <code>https://argocd.kanismile.com</code> to visualize
+the sync status, resource tree, and live diff.</p>
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Automated sync</strong> — reduces manual operations and enforces GitOps discipline</li>
+<li><strong>Self-healing</strong> — prevents configuration drift</li>
+<li><strong>Prune enabled</strong> — keeps the cluster clean when resources are removed from Git</li>
+<li><strong>Single repo</strong> — all manifests live in the same repository as the documentation</li>
+</ul>
+<hr />
 
 
 
