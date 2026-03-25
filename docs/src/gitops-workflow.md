@@ -10,7 +10,7 @@ Any change to the cluster must go through a Git commit.
 
 ## Core Concept
 
-![overview](diagrams/gitops-workflow.svg){ width="40%" }
+![overview](diagrams/gitops-workflow.svg){ width="100%" }
 
 
 - **No manual `kubectl apply`** for application deployments

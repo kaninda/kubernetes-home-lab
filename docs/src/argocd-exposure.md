@@ -24,7 +24,7 @@ User → Cloudflare DNS → Cloudflare Tunnel → Gateway API → HTTPRoute → 
 
 ## Flow Diagram
 
-![overview](diagrams/argocd-exposure-noir.svg){ width="40%" }
+![overview](diagrams/argocd-exposure-noir.svg){ width="100%" }
 
 ---
 
