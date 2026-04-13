@@ -11,7 +11,7 @@ and handles all inbound HTTP traffic coming from the Cloudflare Tunnel.
 
 ## Architecture
 
-![NGINX Gateway Fabric Architecture](diagrams/nginx-gateway-1.svg){ width="100%" }
+![NGINX Gateway Fabric Architecture](diagrams/nginx-gateway.svg){ width="100%" }
 
 ---
 

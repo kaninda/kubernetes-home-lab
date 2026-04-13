@@ -90,6 +90,9 @@ nav:
       - ArgoCD Exposure via Gateway: argocd-exposure.md
       - GitOps Workflow: gitops-workflow.md
 
+  - Monitoring:
+      - Monitoring Stack: monitoring.md
+
   - Operations:
       - Validation: validation.md
       - Kubernetes Reset: kubernetes-reset.md
