@@ -129,8 +129,12 @@ The `edge-gateway-nginx` service is exposed as a **NodePort**:
 edge-gateway-nginx   NodePort   10.103.92.37   80:31224/TCP
 ```
 
-The Cloudflare Tunnel (`cloudflared`) targets this NodePort to forward
-external traffic into the cluster.
+The Cloudflare Tunnel (`cloudflared`) forwards traffic to this service using its
+internal DNS name:
+
+```
+http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80
+```
 
 !!! info
 No LoadBalancer or public IP is required.
