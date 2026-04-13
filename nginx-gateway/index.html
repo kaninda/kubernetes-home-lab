@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -76,6 +76,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#nginx-gateway-fabric" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -865,6 +870,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX Gateway Fabric
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -882,6 +907,141 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-install-the-gateway-api-crds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Install the Gateway API CRDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-install-nginx-gateway-fabric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Install NGINX Gateway Fabric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-verify-the-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verify the installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gatewayclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GatewayClass
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gateway
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service Exposure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Gateway
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1406,139 @@
   
 
 
-  <h1>NGINX Gateway Fabric</h1>
-
-
+<h1 id="nginx-gateway-fabric">NGINX Gateway Fabric<a class="headerlink" href="#nginx-gateway-fabric" title="Permanent link">&para;</a></h1>
+<p>This section describes how <strong>NGINX Gateway Fabric v2.4.1</strong> was installed
+and configured as the Gateway API implementation in this lab.</p>
+<p>NGINX Gateway Fabric acts as the <strong>data plane</strong> for the Gateway API.
+It translates <code>Gateway</code> and <code>HTTPRoute</code> resources into NGINX routing configuration,
+and handles all inbound HTTP traffic coming from the Cloudflare Tunnel.</p>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p><img alt="NGINX Gateway Fabric Architecture" src="../diagrams/nginx-gateway-1.svg" width="80%" /></p>
+<hr />
+<p>Two deployments run in the <code>nginx-gateway</code> namespace:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Image</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nginx-gateway</code></td>
+<td><code>ghcr.io/nginx/nginx-gateway-fabric:2.4.1</code></td>
+<td>Controller — watches Gateway API resources</td>
+</tr>
+<tr>
+<td><code>edge-gateway-nginx</code></td>
+<td><code>ghcr.io/nginx/nginx-gateway-fabric/nginx:2.4.1</code></td>
+<td>Data plane — handles HTTP traffic</td>
+</tr>
+</tbody>
+</table>
+<p>The controller continuously reconciles <code>GatewayClass</code>, <code>Gateway</code>, and <code>HTTPRoute</code>
+resources and configures the NGINX data plane accordingly.</p>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>NGINX Gateway Fabric is installed using the <strong>official upstream manifests</strong> (no Helm).</p>
+<h3 id="1-install-the-gateway-api-crds">1. Install the Gateway API CRDs<a class="headerlink" href="#1-install-the-gateway-api-crds" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
+</code></pre>
+<h3 id="2-install-nginx-gateway-fabric">2. Install NGINX Gateway Fabric<a class="headerlink" href="#2-install-nginx-gateway-fabric" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.4.1/deploy/crds.yaml
+kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.4.1/deploy/default/deploy.yaml
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>This installs NGINX Gateway Fabric in the <code>nginx-gateway</code> namespace
+with all default settings.</p>
+<h3 id="3-verify-the-installation">3. Verify the installation<a class="headerlink" href="#3-verify-the-installation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl get pods -n nginx-gateway
+</code></pre>
+<p>Expected output:</p>
+<pre><code>NAME                                  READY   STATUS    RESTARTS   AGE
+nginx-gateway-xxxx                    1/1     Running   0          ...
+edge-gateway-nginx-xxxx               1/1     Running   0          ...
+</code></pre>
+<hr />
+<h2 id="gatewayclass">GatewayClass<a class="headerlink" href="#gatewayclass" title="Permanent link">&para;</a></h2>
+<p>The <code>GatewayClass</code> resource registers NGINX Gateway Fabric as a Gateway API controller:</p>
+<pre><code class="language-bash">kubectl get gatewayclass
+</code></pre>
+<p>Expected output:</p>
+<pre><code>NAME    CONTROLLER                                   ACCEPTED   AGE
+nginx   gateway.nginx.org/nginx-gateway-controller   True       ...
+</code></pre>
+<p>The GatewayClass is automatically created by the install manifest and links
+to the <code>nginx-gateway-proxy-config</code> NginxProxy configuration.</p>
+<hr />
+<h2 id="gateway">Gateway<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h2>
+<p>A single shared <strong>Gateway</strong> named <code>edge-gateway</code> is deployed in the <code>nginx-gateway</code> namespace.
+It serves as the unique entry point for all HTTP traffic in the lab.</p>
+<pre><code class="language-yaml">apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: edge-gateway
+  namespace: nginx-gateway
+spec:
+  gatewayClassName: nginx
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+</code></pre>
+<p>Apply it with:</p>
+<pre><code class="language-bash">kubectl apply -f nginx_gateway_fabric/gateway.yaml
+</code></pre>
+<p>Key design choices:</p>
+<ul>
+<li><strong>Single listener</strong> on port <code>80</code> (HTTP)</li>
+<li><strong><code>from: All</code></strong> — accepts HTTPRoutes from any namespace in the cluster</li>
+<li><strong>Shared gateway</strong> — all services reuse this single entry point</li>
+</ul>
+<hr />
+<h2 id="service-exposure">Service Exposure<a class="headerlink" href="#service-exposure" title="Permanent link">&para;</a></h2>
+<p>The <code>edge-gateway-nginx</code> service is exposed as a <strong>NodePort</strong>:</p>
+<pre><code>edge-gateway-nginx   NodePort   10.103.92.37   80:31224/TCP
+</code></pre>
+<p>The Cloudflare Tunnel (<code>cloudflared</code>) targets this NodePort to forward
+external traffic into the cluster.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+</div>
+<p>No LoadBalancer or public IP is required.
+The NodePort is only reachable internally — Cloudflare Tunnel handles
+the secure external connection.</p>
+<hr />
+<h2 id="verify-the-gateway">Verify the Gateway<a class="headerlink" href="#verify-the-gateway" title="Permanent link">&para;</a></h2>
+<p>Check the Gateway status:</p>
+<pre><code class="language-bash">kubectl get gateway edge-gateway -n nginx-gateway
+</code></pre>
+<p>Check attached routes:</p>
+<pre><code class="language-bash">kubectl get httproute -A
+</code></pre>
+<p>Expected — 4 routes currently attached to the <code>edge-gateway</code>:</p>
+<pre><code>NAMESPACE    NAME           HOSTNAMES                        AGE
+argocd       argocd         [&quot;argocd.kanismile.com&quot;]         ...
+monitoring   grafana        [&quot;grafana.kanismile.com&quot;]        ...
+monitoring   prometheus     [&quot;prometheus.kanismile.com&quot;]     ...
+monitoring   alertmanager   [&quot;alertmanager.kanismile.com&quot;]   ...
+</code></pre>
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Manifest install over Helm</strong> — keeps the setup explicit and auditable</li>
+<li><strong>Single shared Gateway</strong> — avoids duplicating listener config per service</li>
+<li><strong>NodePort over LoadBalancer</strong> — no cloud provider or MetalLB required</li>
+<li><strong><code>from: All</code></strong> — allows HTTPRoutes to be defined close to each application's namespace</li>
+</ul>
+<hr />
 
 
 
