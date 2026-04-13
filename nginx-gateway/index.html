@@ -1507,8 +1507,10 @@ spec:
 <p>The <code>edge-gateway-nginx</code> service is exposed as a <strong>NodePort</strong>:</p>
 <pre><code>edge-gateway-nginx   NodePort   10.103.92.37   80:31224/TCP
 </code></pre>
-<p>The Cloudflare Tunnel (<code>cloudflared</code>) targets this NodePort to forward
-external traffic into the cluster.</p>
+<p>The Cloudflare Tunnel (<code>cloudflared</code>) forwards traffic to this service using its
+internal DNS name:</p>
+<pre><code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80
+</code></pre>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 </div>
