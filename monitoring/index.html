@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../monitoring/">
+        <link rel="prev" href="../gitops-workflow/">
       
       
-        <link rel="next" href="../kubernetes-reset/">
+        <link rel="next" href="../validation/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Validation - Kubernetes Home Lab</title>
+        <title>Monitoring Stack - Kubernetes Home Lab</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cluster-validation" class="md-skip">
+        <a href="#monitoring-stack" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Validation
+              Monitoring Stack
             
           </span>
         </div>
@@ -328,11 +328,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../monitoring/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -348,13 +350,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../validation/" class="md-tabs__link">
           
   
   
@@ -1114,95 +1114,6 @@
       
   
   
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Monitoring
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Monitoring
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../monitoring/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Monitoring Stack
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -1224,17 +1135,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Operations
+    Monitoring
   
 
     
@@ -1245,12 +1156,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Operations
+    Monitoring
   
 
           </label>
@@ -1279,7 +1190,7 @@
   <span class="md-ellipsis">
     
   
-    Validation
+    Monitoring Stack
   
 
     
@@ -1297,7 +1208,7 @@
   <span class="md-ellipsis">
     
   
-    Validation
+    Monitoring Stack
   
 
     
@@ -1323,22 +1234,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#node-status" class="md-nav__link">
+  <a href="#architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Node status
+        Architecture
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Node status">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Components
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#expected" class="md-nav__link">
+  <a href="#add-the-helm-repository" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Expected:
+        Add the Helm repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create the namespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-the-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install the stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the installation
       
     </span>
   </a>
@@ -1351,22 +1317,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#system-pods-status" class="md-nav__link">
+  <a href="#bare-metal-fixes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System pods status
+        Bare-Metal Fixes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="System pods status">
+    <nav class="md-nav" aria-label="Bare-Metal Fixes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#check-core-system-components" class="md-nav__link">
+  <a href="#kube-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check core system components:
+        kube-proxy
       
     </span>
   </a>
@@ -1374,10 +1340,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#expected_1" class="md-nav__link">
+  <a href="#kube-scheduler" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Expected:
+        kube-scheduler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kube-controller-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kube-controller-manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        etcd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-all-targets-are-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify all targets are up
       
     </span>
   </a>
@@ -1390,22 +1389,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#component-health" class="md-nav__link">
+  <a href="#exposure-via-gateway-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Component health
+        Exposure via Gateway API
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Component health">
+    <nav class="md-nav" aria-label="Exposure via Gateway API">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#verify-control-plane-component-health" class="md-nav__link">
+  <a href="#httproute-example-grafana" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify control plane component health:
+        HTTPRoute example (Grafana)
       
     </span>
   </a>
@@ -1418,138 +1417,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cluster-events" class="md-nav__link">
+  <a href="#access" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cluster events
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Cluster events">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#expected_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Expected:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dns-resolution" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        DNS resolution
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="DNS resolution">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#validate-coredns-functionality" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validate CoreDNS functionality:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#expected_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Expected:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pod-to-pod-networking" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pod-to-Pod networking
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pod-to-Pod networking">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#deploy-two-test-pods-on-different-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Deploy two test pods on different nodes:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#check-pod-placement-and-ips" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Check pod placement and IPs:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verify-connectivity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify connectivity:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#expected_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Expected:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cleanup-test-pods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cleanup test pods
+        Access
       
     </span>
   </a>
@@ -1557,69 +1428,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-server-access" class="md-nav__link">
+  <a href="#design-decisions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API server access
+        Design Decisions
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="API server access">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#verify-api-access-and-permissions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify API access and permissions:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#expected_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Expected:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Summary">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#at-this-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        At this stage:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1627,6 +1442,95 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1684,7 +1588,7 @@
 
 
   
-    <a href="https://github.com/kaninda/kubernetes-home-lab/edit/master/docs/validation.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/kaninda/kubernetes-home-lab/edit/master/docs/monitoring.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1693,121 +1597,218 @@
     
       
     
-    <a href="https://github.com/kaninda/kubernetes-home-lab/raw/master/docs/validation.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kaninda/kubernetes-home-lab/raw/master/docs/monitoring.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="cluster-validation">Cluster Validation<a class="headerlink" href="#cluster-validation" title="Permanent link">&para;</a></h1>
-<p>This section validates that the Kubernetes cluster is <strong>healthy, functional
-and ready for workloads</strong>.</p>
-<p>The checks below are intentionally simple and reproducible.<br />
-They focus on <strong>core Kubernetes components</strong>, <strong>networking</strong>, and <strong>basic scheduling</strong>.</p>
+<h1 id="monitoring-stack">Monitoring Stack<a class="headerlink" href="#monitoring-stack" title="Permanent link">&para;</a></h1>
+<p>This section describes how the <strong>kube-prometheus-stack</strong> was installed and configured
+to monitor the Kubernetes Home Lab cluster.</p>
+<p>The stack provides full observability across all nodes and workloads:
+metrics collection, visualization, and alerting — all exposed securely
+via Cloudflare Tunnel and Gateway API.</p>
 <hr />
-<h2 id="node-status">Node status<a class="headerlink" href="#node-status" title="Permanent link">&para;</a></h2>
-<p>Verify that all nodes are registered and ready:</p>
-<pre><code class="language-bash">kubectl get nodes -o wide
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p><img alt="Monitoring Architecture" src="../diagrams/monitoring.svg" width="100%" /></p>
+<h2 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Pod</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prometheus</code></td>
+<td><code>prometheus-kube-prometheus-stack-prometheus-0</code></td>
+<td>Metrics collection and storage</td>
+</tr>
+<tr>
+<td><code>grafana</code></td>
+<td><code>kube-prometheus-stack-grafana-xxxx</code></td>
+<td>Visualization dashboards</td>
+</tr>
+<tr>
+<td><code>alertmanager</code></td>
+<td><code>alertmanager-kube-prometheus-stack-alertmanager-0</code></td>
+<td>Alert routing</td>
+</tr>
+<tr>
+<td><code>prometheus-operator</code></td>
+<td><code>kube-prometheus-stack-operator-xxxx</code></td>
+<td>Manages Prometheus/Alertmanager CRDs</td>
+</tr>
+<tr>
+<td><code>kube-state-metrics</code></td>
+<td><code>kube-prometheus-stack-kube-state-metrics-xxxx</code></td>
+<td>Kubernetes object metrics</td>
+</tr>
+<tr>
+<td><code>node-exporter</code></td>
+<td><code>kube-prometheus-stack-prometheus-node-exporter-xxxx</code> ×3</td>
+<td>Node-level metrics (1 per node)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>The stack is installed via <strong>Helm</strong> using the <code>kube-prometheus-stack</code> chart.</p>
+<h3 id="add-the-helm-repository">Add the Helm repository<a class="headerlink" href="#add-the-helm-repository" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
 </code></pre>
-<h3 id="expected">Expected:<a class="headerlink" href="#expected" title="Permanent link">&para;</a></h3>
+<h3 id="create-the-namespace">Create the namespace<a class="headerlink" href="#create-the-namespace" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl create namespace monitoring
+</code></pre>
+<h3 id="install-the-stack">Install the stack<a class="headerlink" href="#install-the-stack" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+  --namespace monitoring \
+  --set prometheus.prometheusSpec.retention=7d \
+  --set alertmanager.enabled=true \
+  --set grafana.enabled=true
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+</div>
+<p><strong>Chart version</strong> : <code>kube-prometheus-stack-83.4.0</code>
+<strong>App version</strong> : <code>v0.90.1</code> (prometheus-operator)</p>
+<h3 id="verify-the-installation">Verify the installation<a class="headerlink" href="#verify-the-installation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">kubectl get pods -n monitoring
+</code></pre>
+<p>Expected — all pods Running:</p>
+<pre><code>alertmanager-kube-prometheus-stack-alertmanager-0           2/2   Running
+kube-prometheus-stack-grafana-xxxx                          3/3   Running
+kube-prometheus-stack-kube-state-metrics-xxxx               1/1   Running
+kube-prometheus-stack-operator-xxxx                         1/1   Running
+kube-prometheus-stack-prometheus-node-exporter-xxxx         1/1   Running  (×3)
+prometheus-kube-prometheus-stack-prometheus-0               2/2   Running
+</code></pre>
+<hr />
+<h2 id="bare-metal-fixes">Bare-Metal Fixes<a class="headerlink" href="#bare-metal-fixes" title="Permanent link">&para;</a></h2>
+<p>On a bare-metal cluster, several components listen on <code>127.0.0.1</code> (loopback)
+by default and are not reachable by Prometheus.</p>
+<p>Verify which targets are down:</p>
+<pre><code class="language-promql">up == 0
+</code></pre>
+<p>The following 6 targets were down and required manual fixes.</p>
+<hr />
+<h3 id="kube-proxy">kube-proxy<a class="headerlink" href="#kube-proxy" title="Permanent link">&para;</a></h3>
+<p>Edit the ConfigMap (applied to all 3 nodes via DaemonSet):</p>
+<pre><code class="language-bash">kubectl edit configmap kube-proxy -n kube-system
+# metricsBindAddress: &quot;&quot; → metricsBindAddress: &quot;0.0.0.0:10249&quot;
+
+kubectl rollout restart daemonset kube-proxy -n kube-system
+</code></pre>
+<h3 id="kube-scheduler">kube-scheduler<a class="headerlink" href="#kube-scheduler" title="Permanent link">&para;</a></h3>
+<p>Edit the static pod manifest on <code>cp-1</code>:</p>
+<pre><code class="language-bash">sudo vi /etc/kubernetes/manifests/kube-scheduler.yaml
+# --bind-address=127.0.0.1 → --bind-address=0.0.0.0
+</code></pre>
+<hr />
+<h3 id="kube-controller-manager">kube-controller-manager<a class="headerlink" href="#kube-controller-manager" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">sudo vi /etc/kubernetes/manifests/kube-controller-manager.yaml
+# --bind-address=127.0.0.1 → --bind-address=0.0.0.0
+</code></pre>
+<hr />
+<h3 id="etcd">etcd<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">sudo vi /etc/kubernetes/manifests/etcd.yaml
+# --listen-metrics-urls=http://127.0.0.1:2381 → --listen-metrics-urls=http://0.0.0.0:2381
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>Static pod manifests are automatically reloaded by kubelet — no manual restart needed.
+For kube-proxy, a DaemonSet rollout restart is required to apply the ConfigMap change.</p>
+<h3 id="verify-all-targets-are-up">Verify all targets are up<a class="headerlink" href="#verify-all-targets-are-up" title="Permanent link">&para;</a></h3>
+<pre><code class="language-promql">up == 0
+</code></pre>
+<p>Expected result: <strong>Empty query result</strong> — all targets are UP. ✅</p>
+<hr />
+<h2 id="exposure-via-gateway-api">Exposure via Gateway API<a class="headerlink" href="#exposure-via-gateway-api" title="Permanent link">&para;</a></h2>
+<p>Three HTTPRoutes are deployed in the <code>monitoring</code> namespace,
+all pointing to the shared <code>edge-gateway</code> in <code>nginx-gateway</code>.</p>
+<pre><code class="language-bash">kubectl get httproute -n monitoring
+</code></pre>
+<pre><code>NAME           HOSTNAMES                        AGE
+alertmanager   [&quot;alertmanager.kanismile.com&quot;]   ...
+grafana        [&quot;grafana.kanismile.com&quot;]         ...
+prometheus     [&quot;prometheus.kanismile.com&quot;]      ...
+</code></pre>
+<h3 id="httproute-example-grafana">HTTPRoute example (Grafana)<a class="headerlink" href="#httproute-example-grafana" title="Permanent link">&para;</a></h3>
+<pre><code class="language-yaml">apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: edge-gateway
+      namespace: nginx-gateway
+  hostnames:
+    - grafana.kanismile.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: kube-prometheus-stack-grafana
+          port: 80
+</code></pre>
+<p>The same pattern applies for Prometheus (port <code>9090</code>) and Alertmanager (port <code>9093</code>).</p>
+<p>Apply all routes:</p>
+<pre><code class="language-bash">kubectl apply -f httproute/httproute-prometheus.yaml
+kubectl apply -f httproute/httproute-grafana.yaml
+kubectl apply -f httproute/httproute-alertmanager.yaml
+</code></pre>
+<hr />
+<h2 id="access">Access<a class="headerlink" href="#access" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>URL</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grafana</td>
+<td><code>https://grafana.kanismile.com</code></td>
+<td><code>admin</code> / <code>prom-operator</code></td>
+</tr>
+<tr>
+<td>Prometheus</td>
+<td><code>https://prometheus.kanismile.com</code></td>
+<td>❌ No auth</td>
+</tr>
+<tr>
+<td>Alertmanager</td>
+<td><code>https://alertmanager.kanismile.com</code></td>
+<td>❌ No auth</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>Prometheus and Alertmanager are currently accessible without authentication.
+It is recommended to add a <strong>Cloudflare Access</strong> policy in front of these
+two URLs to restrict access.</p>
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
 <ul>
-<li>all nodes are in Ready state</li>
-<li>control plane has the role control-plane</li>
-<li>worker nodes have no role</li>
-<li>correct internal IPs are reported</li>
+<li><strong>Helm install</strong> — <code>kube-prometheus-stack</code> bundles all components in a single release</li>
+<li><strong>Retention set to 7 days</strong> — appropriate for a home lab, avoids excessive disk usage</li>
+<li><strong>Bare-metal bind address fixes</strong> — required for full cluster visibility on kubeadm setups</li>
+<li><strong>ClusterIP only</strong> — all services remain internal, exposure handled by Gateway API</li>
 </ul>
 <hr />
-<h2 id="system-pods-status">System pods status<a class="headerlink" href="#system-pods-status" title="Permanent link">&para;</a></h2>
-<h3 id="check-core-system-components">Check core system components:<a class="headerlink" href="#check-core-system-components" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get pods -n kube-system
-</code></pre>
-<h3 id="expected_1">Expected:<a class="headerlink" href="#expected_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>kube-apiserver: Running</li>
-<li>kube-controller-manager: Running</li>
-<li>kube-scheduler: Running</li>
-<li>etcd: Running</li>
-<li>calico-node: Running on all nodes</li>
-<li>calico-kube-controllers: Running</li>
-</ul>
-<p><strong>No pods should be in CrashLoopBackOff or Pending.</strong></p>
-<hr />
-<h2 id="component-health">Component health<a class="headerlink" href="#component-health" title="Permanent link">&para;</a></h2>
-<h3 id="verify-control-plane-component-health">Verify control plane component health:<a class="headerlink" href="#verify-control-plane-component-health" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get componentstatuses
-</code></pre>
-<p>Expected:</p>
-<ul>
-<li>all components report Healthy</li>
-</ul>
-<p><strong>Note</strong>: This command is deprecated but still useful for quick validation.</p>
-<hr />
-<h2 id="cluster-events">Cluster events<a class="headerlink" href="#cluster-events" title="Permanent link">&para;</a></h2>
-<p>Inspect recent cluster events:</p>
-<pre><code class="language-bash">kubectl get events -A --sort-by=.metadata.creationTimestamp
-</code></pre>
-<h3 id="expected_2">Expected:<a class="headerlink" href="#expected_2" title="Permanent link">&para;</a></h3>
-<ul>
-<li>no recurring errors</li>
-<li>no certificate or networking failures</li>
-</ul>
-<p>Warnings may appear briefly during startup but should not persist.</p>
-<hr />
-<h2 id="dns-resolution">DNS resolution<a class="headerlink" href="#dns-resolution" title="Permanent link">&para;</a></h2>
-<h3 id="validate-coredns-functionality">Validate CoreDNS functionality:<a class="headerlink" href="#validate-coredns-functionality" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl run dns-test \
---image=busybox \
---restart=Never \
---rm -it -- \
-nslookup kubernetes.default
-</code></pre>
-<h3 id="expected_3">Expected:<a class="headerlink" href="#expected_3" title="Permanent link">&para;</a></h3>
-<ul>
-<li>DNS resolution succeeds</li>
-<li>service IP is returned</li>
-</ul>
-<hr />
-<h2 id="pod-to-pod-networking">Pod-to-Pod networking<a class="headerlink" href="#pod-to-pod-networking" title="Permanent link">&para;</a></h2>
-<h3 id="deploy-two-test-pods-on-different-nodes">Deploy two test pods on different nodes:<a class="headerlink" href="#deploy-two-test-pods-on-different-nodes" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl run pod-a --image=busybox --restart=Never -- sleep 3600
-kubectl run pod-b --image=busybox --restart=Never -- sleep 3600
-</code></pre>
-<h3 id="check-pod-placement-and-ips">Check pod placement and IPs:<a class="headerlink" href="#check-pod-placement-and-ips" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl get pods -o wide
-</code></pre>
-<h3 id="verify-connectivity">Verify connectivity:<a class="headerlink" href="#verify-connectivity" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl exec pod-a -- ping -c 3 &lt;POD-B-IP&gt;
-</code></pre>
-<h3 id="expected_4">Expected:<a class="headerlink" href="#expected_4" title="Permanent link">&para;</a></h3>
-<ul>
-<li>ICMP traffic succeeds</li>
-<li>no packet loss</li>
-</ul>
-<hr />
-<h2 id="cleanup-test-pods">Cleanup test pods<a class="headerlink" href="#cleanup-test-pods" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">kubectl delete pod pod-a pod-b
-</code></pre>
-<hr />
-<h2 id="api-server-access">API server access<a class="headerlink" href="#api-server-access" title="Permanent link">&para;</a></h2>
-<h3 id="verify-api-access-and-permissions">Verify API access and permissions:<a class="headerlink" href="#verify-api-access-and-permissions" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">kubectl auth can-i get pods --all-namespaces
-</code></pre>
-<h3 id="expected_5">Expected:<a class="headerlink" href="#expected_5" title="Permanent link">&para;</a></h3>
-<ul>
-<li>yes</li>
-</ul>
-<hr />
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<h3 id="at-this-stage">At this stage:<a class="headerlink" href="#at-this-stage" title="Permanent link">&para;</a></h3>
-<ul>
-<li>All nodes are Ready</li>
-<li>Core control plane components are healthy</li>
-<li>Calico networking is functional</li>
-<li>DNS resolution works</li>
-<li>Pod-to-Pod communication is verified</li>
-</ul>
-<p><strong>The Kubernetes cluster is fully operational and ready for workloads.</strong></p>
 
 
 
