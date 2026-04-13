@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cloudflare-tunnel" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -893,6 +898,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloudflare Tunnel
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -910,6 +935,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tunnel-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tunnel Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tunnel-token-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tunnel Token Secret
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Deployment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1246,9 +1367,144 @@
   
 
 
-  <h1>Cloudflare Tunnel</h1>
-
-
+<h1 id="cloudflare-tunnel">Cloudflare Tunnel<a class="headerlink" href="#cloudflare-tunnel" title="Permanent link">&para;</a></h1>
+<p>This section describes how <strong>Cloudflare Tunnel</strong> is used to expose cluster services
+to the internet without any public IP, open port, or LoadBalancer.</p>
+<p>All external traffic enters the cluster through a single secure outbound connection
+established by the <code>cloudflared</code> agent running inside the cluster.</p>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p><img alt="Cloudflare Tunnel Architecture" src="../diagrams/cloudflare-tunnel.svg" width="100%" /></p>
+<ul>
+<li><strong>TLS is terminated at the Cloudflare edge</strong> — traffic inside the cluster is plain HTTP</li>
+<li><strong>No inbound ports</strong> are opened on the cluster nodes</li>
+<li><strong>One tunnel</strong> handles all services via hostname-based routing</li>
+</ul>
+<hr />
+<h2 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<p>The <code>cloudflared</code> agent runs inside the cluster and maintains a persistent
+<strong>outbound connection</strong> to the Cloudflare edge network.</p>
+<p>When a user requests <code>https://argocd.kanismile.com</code>:</p>
+<ol>
+<li>Cloudflare resolves the domain and routes the request through the tunnel</li>
+<li><code>cloudflared</code> receives the request inside the cluster</li>
+<li>It forwards the request to <code>edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code></li>
+<li>NGINX Gateway Fabric matches the hostname via the corresponding HTTPRoute</li>
+<li>The request is forwarded to the target service</li>
+</ol>
+<hr />
+<h2 id="tunnel-configuration">Tunnel Configuration<a class="headerlink" href="#tunnel-configuration" title="Permanent link">&para;</a></h2>
+<p>The tunnel was created via the <strong>Cloudflare Zero Trust dashboard</strong> and configured
+with one public hostname per service, all pointing to the same internal service:</p>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>Internal Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>argocd.kanismile.com</code></td>
+<td><code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code></td>
+</tr>
+<tr>
+<td><code>grafana.kanismile.com</code></td>
+<td><code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code></td>
+</tr>
+<tr>
+<td><code>prometheus.kanismile.com</code></td>
+<td><code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code></td>
+</tr>
+<tr>
+<td><code>alertmanager.kanismile.com</code></td>
+<td><code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+</div>
+<p>All hostnames point to the same internal URL.
+Hostname-based routing is handled by the HTTPRoutes at the Gateway layer —
+not by the tunnel itself.</p>
+<hr />
+<h2 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h2>
+<p>The <code>cloudflared</code> agent runs as a <strong>Deployment</strong> in the <code>cloudflare</code> namespace.</p>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared
+  namespace: cloudflare
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflared
+  template:
+    metadata:
+      labels:
+        app: cloudflared
+    spec:
+      containers:
+        - name: cloudflared
+          image: cloudflare/cloudflared:latest
+          args:
+            - tunnel
+            - run
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflared-token
+                  key: TUNNEL_TOKEN
+          resources:
+            limits:
+              memory: &quot;128Mi&quot;
+              cpu: &quot;100m&quot;
+</code></pre>
+<p>Apply it with:</p>
+<pre><code class="language-bash">kubectl create namespace cloudflare
+kubectl apply -f cloudflare/cloudflared.yaml
+</code></pre>
+<hr />
+<h2 id="tunnel-token-secret">Tunnel Token Secret<a class="headerlink" href="#tunnel-token-secret" title="Permanent link">&para;</a></h2>
+<p>The tunnel token is stored as a Kubernetes Secret and injected via environment variable.</p>
+<p>Create the secret from the token provided by the Cloudflare Zero Trust dashboard:</p>
+<pre><code class="language-bash">kubectl create secret generic cloudflared-token \
+  --from-literal=TUNNEL_TOKEN=&lt;your-tunnel-token&gt; \
+  --namespace cloudflare
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>Never commit the tunnel token to Git.
+The secret must be created manually on the cluster before applying the Deployment.</p>
+<hr />
+<h2 id="verify-the-deployment">Verify the Deployment<a class="headerlink" href="#verify-the-deployment" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">kubectl get pods -n cloudflare
+</code></pre>
+<p>Expected output:</p>
+<pre><code>NAME                           READY   STATUS    RESTARTS   AGE
+cloudflared-xxxx               1/1     Running   0          ...
+</code></pre>
+<p>Check the tunnel is connected from the Cloudflare Zero Trust dashboard:</p>
+<p><strong>Zero Trust → Networks → Tunnels → k8s-homelab → Status: Healthy</strong></p>
+<hr />
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Single tunnel for all services</strong> — one <code>cloudflared</code> instance handles all hostnames</li>
+<li><strong>All routes point to the Gateway</strong> — routing logic stays in Kubernetes (HTTPRoutes), not in Cloudflare</li>
+<li><strong>Token via Secret</strong> — the tunnel token is never stored in Git</li>
+<li><strong>No public IP required</strong> — the cluster nodes have no inbound exposure</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p>To add a new service, simply create a new HTTPRoute in the cluster
+and add the corresponding hostname in the Cloudflare Zero Trust dashboard
+pointing to <code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code>.</p>
+<hr />
 
 
 
