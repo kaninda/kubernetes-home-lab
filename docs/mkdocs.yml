@@ -92,6 +92,7 @@ nav:
 
   - Storage:
       - Longhorn: longhorn.md
+      - Nextcloud: nextcloud.md
 
   - Monitoring:
       - Monitoring Stack: monitoring.md

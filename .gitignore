@@ -77,3 +77,5 @@
 /docs/site/sitemap.xml.gz
 /docs/history.txt
 /httpRoute/cm.yaml
+/nextcloud/postgres-nextcloud-secret.yaml
+/nextcloud/nextcloud-secrets.yaml
