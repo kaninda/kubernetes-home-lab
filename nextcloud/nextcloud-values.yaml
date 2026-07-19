@@ -1,0 +1,55 @@
+# Values pour le chart officiel nextcloud/nextcloud
+# helm repo add nextcloud https://nextcloud.github.io/helm/
+# helm install nextcloud nextcloud/nextcloud -n nextcloud --create-namespace -f nextcloud-values.yaml
+
+nextcloud:
+  host: nextcloud.kanismile.com
+
+  # Admin initial — créé au premier démarrage, depuis le Secret nextcloud-admin
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-admin
+    usernameKey: username
+    passwordKey: password
+
+  # Derrière Cloudflare Tunnel + Gateway : TLS terminé en amont, le pod voit du HTTP.
+  # Sans ça : redirections cassées et liens générés en http://
+  configs:
+    proxy.config.php: |
+      <?php
+      $CONFIG = array(
+        'overwriteprotocol' => 'https',
+        'overwrite.cli.url' => 'https://nextcloud.kanismile.com',
+        'trusted_proxies' => array('10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16'),
+      );
+
+# La base embarquée (SQLite) : désactivée — on utilise notre instance dédiée
+internalDatabase:
+  enabled: false
+
+externalDatabase:
+  enabled: true
+  type: postgresql
+  host: postgres-nextcloud.databases.svc.cluster.local:5432
+  database: nextcloud
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-db
+    usernameKey: username
+    passwordKey: password
+
+# PVC des fichiers utilisateurs — classe par défaut (longhorn), extensible plus tard
+persistence:
+  enabled: true
+  size: 50Gi
+
+# Tâches de fond Nextcloud (indexation, nettoyage) via CronJob Kubernetes
+cronjob:
+  enabled: true
+
+# Sondes : le premier démarrage (installation + migrations) peut être long
+startupProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  failureThreshold: 30
