@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../gitops-workflow/">
+        <link rel="prev" href="../longhorn/">
       
       
-        <link rel="next" href="../nextcloud/">
+        <link rel="next" href="../monitoring/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Longhorn - Kubernetes Home Lab</title>
+        <title>Nextcloud - Kubernetes Home Lab</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#longhorn-stockage-replique-du-cluster-bare-metal" class="md-skip">
+        <a href="#nextcloud-cloud-de-fichiers-auto-heberge" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Longhorn
+              Nextcloud
             
           </span>
         </div>
@@ -334,7 +334,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../longhorn/" class="md-tabs__link">
           
   
   
@@ -1191,6 +1191,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../longhorn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Longhorn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1210,7 +1238,7 @@
   <span class="md-ellipsis">
     
   
-    Longhorn
+    Nextcloud
   
 
     
@@ -1228,7 +1256,7 @@
   <span class="md-ellipsis">
     
   
-    Longhorn
+    Nextcloud
   
 
     
@@ -1262,30 +1290,13 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lecture-des-capacites-dashboard" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lecture des capacités (dashboard)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequis-appliques-workers-uniquement-pour-les-modules-les-3-nuds-pour-le-reste" class="md-nav__link">
+  <a href="#postgresql-dedie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prérequis appliqués (workers uniquement pour les modules, les 3 nœuds pour le reste)
+        PostgreSQL dédié
       
     </span>
   </a>
@@ -1293,10 +1304,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification-prealable-longhornctl-pas-environment_checksh" class="md-nav__link">
+  <a href="#secrets" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Vérification préalable — longhornctl (pas environment_check.sh)
+        Secrets
       
     </span>
   </a>
@@ -1315,10 +1326,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
+  <a href="#exposition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation
+        Exposition
       
     </span>
   </a>
@@ -1326,10 +1337,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#acces-a-lui-httpslonghornkanismilecom" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accès à l'UI — https://longhorn.kanismile.com
+        Validation
       
     </span>
   </a>
@@ -1362,34 +1373,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../nextcloud/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nextcloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1625,7 +1608,7 @@
 
 
   
-    <a href="https://github.com/kaninda/kubernetes-home-lab/edit/master/docs/longhorn.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/kaninda/kubernetes-home-lab/edit/master/docs/nextcloud.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1634,167 +1617,174 @@
     
       
     
-    <a href="https://github.com/kaninda/kubernetes-home-lab/raw/master/docs/longhorn.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kaninda/kubernetes-home-lab/raw/master/docs/nextcloud.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="longhorn-stockage-replique-du-cluster-bare-metal">Longhorn — Stockage répliqué du cluster bare-metal<a class="headerlink" href="#longhorn-stockage-replique-du-cluster-bare-metal" title="Permanent link">&para;</a></h1>
+<h1 id="nextcloud-cloud-de-fichiers-auto-heberge">Nextcloud — Cloud de fichiers auto-hébergé<a class="headerlink" href="#nextcloud-cloud-de-fichiers-auto-heberge" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Résumé</p>
+<p>Nextcloud <strong>34.0.1</strong> (chart Helm officiel) déployé le <strong>19/07/2026</strong>, accessible sur
+<a href="https://nextcloud.kanismile.com">https://nextcloud.kanismile.com</a> (auth Nextcloud intégrée).
+Fichiers sur un PVC Longhorn <strong>50 Gi</strong>, métadonnées dans une instance
+<strong>PostgreSQL 17 dédiée</strong> (<code>postgres-nextcloud</code>, namespace <code>databases</code>, PVC 10 Gi).
+Tous les volumes répliqués ×2 par Longhorn.</p>
 </div>
-<p>Longhorn <strong>1.12.0</strong> installé via Helm le <strong>18/07/2026</strong> sur le cluster bare-metal
-(<code>cp-1</code> / <code>worker-1</code> / <code>worker-2</code>, Kubernetes v1.34.3).
-StorageClass <code>longhorn</code> par défaut, <strong>2 réplicas</strong> par volume, données sur les workers uniquement.
-UI exposée sur <a href="https://longhorn.kanismile.com">https://longhorn.kanismile.com</a>, protégée par Cloudflare Access.</p>
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
-<p><img alt="Architecture Longhorn" src="../diagrams/longhorn-architecture.svg" width="100%" /></p>
+<p><img alt="Architecture Longhorn" src="../diagrams/nextcloud-architecture.svg" width="100%" /></p>
+<p>Deux namespaces, deux PVC, une connexion réseau :</p>
 <ul>
-<li>Un PVC sans <code>storageClassName</code> tombe sur la StorageClass <code>longhorn</code> (classe par défaut).</li>
-<li>Chaque volume est répliqué en <strong>2 copies synchrones</strong>, une sur <code>worker-1</code>, une sur <code>worker-2</code>.</li>
-<li><code>cp-1</code> (control-plane, taint <code>NoSchedule</code>) n'héberge <strong>ni réplica ni composant Longhorn</strong> —
-  seuls les workers font tourner <code>longhorn-manager</code>, <code>instance-manager</code>, <code>engine-image</code> et <code>longhorn-csi-plugin</code> (2 exemplaires de chaque).</li>
-<li>Données hôte : <code>/var/lib/longhorn</code> sur le NVMe de chaque worker (ext4, ~440 Go libres/nœud).</li>
+<li><strong><code>databases</code></strong> : StatefulSet <code>postgres-nextcloud</code> (PostgreSQL 17-alpine) + Service
+  headless + PVC Longhorn 10 Gi. Instance <strong>dédiée</strong> à Nextcloud — le pattern retenu est
+  <em>une instance par application</em> (upgrades, pannes et restores isolés par app ; en K8s,
+  une instance de plus ne coûte que ~30 lignes de YAML et 256 Mi de RAM). Une future app
+  aura sa propre instance <code>postgres-&lt;app&gt;</code> dans ce même namespace.</li>
+<li><strong><code>nextcloud</code></strong> : le chart Helm (Deployment + CronJob) + PVC Longhorn 50 Gi pour les
+  fichiers utilisateurs.</li>
 </ul>
-<p>Pourquoi 2 réplicas et pas 3 : avec le taint sur <code>cp-1</code>, seuls 2 nœuds peuvent stocker.
-Un <code>defaultReplicaCount: 3</code> laisserait les volumes en état dégradé permanent.</p>
-<h3 id="lecture-des-capacites-dashboard">Lecture des capacités (dashboard)<a class="headerlink" href="#lecture-des-capacites-dashboard" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Reserved</strong> ≈ 30 % par disque : espace que Longhorn s'interdit d'allouer (OS, images).
-  Réglable via <code>storageReservedPercentageForDefaultDisk</code> (+ édition des disques déjà
-  enregistrés dans Node → disque → Storage Reserved).</li>
-<li><strong>Used</strong> compte l'empreinte <strong>par réplica</strong> : un PVC de 50 Gi = 100 Gi comptés (×2).</li>
-<li>Les volumes sont <strong>thin-provisioned</strong> : seuls les blocs réellement écrits occupent
-  du disque ("Actual Size" dans l'UI). L'expansion de volume est supportée.</li>
-</ul>
-<h2 id="prerequis-appliques-workers-uniquement-pour-les-modules-les-3-nuds-pour-le-reste">Prérequis appliqués (workers uniquement pour les modules, les 3 nœuds pour le reste)<a class="headerlink" href="#prerequis-appliques-workers-uniquement-pour-les-modules-les-3-nuds-pour-le-reste" title="Permanent link">&para;</a></h2>
-<p>Sur <strong>chaque nœud</strong> :</p>
-<pre><code class="language-bash">sudo apt-get install -y open-iscsi nfs-common
-sudo systemctl enable --now iscsid
+<p>Trajet d'un upload : le fichier brut descend sur le PVC <code>nextcloud-nextcloud</code> ;
+la métadonnée (propriétaire, chemin, taille, partages) part par le réseau vers
+<code>postgres-nextcloud.databases.svc.cluster.local:5432</code> (bloc <code>externalDatabase</code> du chart).
+Nextcloud sépare toujours ces deux mondes : le PVC est la bibliothèque, Postgres le
+catalogue — la navigation et la sync ne scannent jamais le disque, elles interrogent la base.</p>
+<p>Fichiers du repo :</p>
+<pre><code>nextcloud/
+├── postgres-nextcloud.yaml          # Namespace databases + Service + StatefulSet
+├── postgres-nextcloud-secret.yaml   # (gitignoré) credentials Postgres
+├── nextcloud-values.yaml            # values du chart
+└── nextcloud-secrets.yaml           # (gitignoré) admin + connexion DB
+httpRoute/
+└── nextcloud-httproute.yaml
 </code></pre>
-<p>Sur <strong>worker-1 et worker-2</strong> :</p>
-<pre><code class="language-bash"># Modules noyau requis (RWX + volumes chiffrés)
-sudo modprobe nfs &amp;&amp; sudo modprobe dm_crypt
-cat &lt;&lt;'EOF' | sudo tee /etc/modules-load.d/longhorn.conf
-nfs
-dm_crypt
-EOF
-
-# multipathd désactivé : il capture les devices Longhorn (piège bare-metal classique)
-sudo systemctl disable --now multipathd multipathd.socket
-</code></pre>
-<h2 id="verification-prealable-longhornctl-pas-environment_checksh">Vérification préalable — <code>longhornctl</code> (pas environment_check.sh)<a class="headerlink" href="#verification-prealable-longhornctl-pas-environment_checksh" title="Permanent link">&para;</a></h2>
+<h2 id="postgresql-dedie">PostgreSQL dédié<a class="headerlink" href="#postgresql-dedie" title="Permanent link">&para;</a></h2>
+<p>Déploiement déclaratif (<code>nextcloud/postgres-nextcloud.yaml</code>) : StatefulSet mono-réplica,
+<code>postgres:17-alpine</code>, base <code>nextcloud</code> créée automatiquement au premier démarrage via
+<code>POSTGRES_DB</code>, probes <code>pg_isready</code>, PVC 10 Gi sur la StorageClass par défaut.</p>
 <div class="admonition warning">
-<p class="admonition-title">Piège rencontré</p>
+<p class="admonition-title">Piège : PGDATA et lost+found</p>
+<p>Un volume Longhorn fraîchement formaté en ext4 contient <code>lost+found</code>, et <code>initdb</code>
+refuse un répertoire non vide → CrashLoopBackOff au premier démarrage.
+Parade (dans le manifest) : <code>PGDATA=/var/lib/postgresql/data/pgdata</code> — un
+<strong>sous-répertoire</strong> du point de montage.</p>
 </div>
-<p>Le script <code>environment_check.sh</code> documenté un peu partout est <strong>déprécié et retiré</strong>
-des versions récentes → 404 sur les URL <code>v1.12.x</code>. Utiliser la CLI <code>longhornctl</code>.</p>
-<p>Depuis le poste d'admin (macOS Apple Silicon) :</p>
-<pre><code class="language-bash">curl -sSfL -o longhornctl \
-  https://github.com/longhorn/cli/releases/download/v1.12.0/longhornctl-darwin-arm64
-chmod +x longhornctl &amp;&amp; sudo mv longhornctl /usr/local/bin/
+<pre><code class="language-bash">kubectl apply -f nextcloud/postgres-nextcloud.yaml
+kubectl apply -f nextcloud/postgres-nextcloud-secret.yaml
+kubectl -n databases exec -it postgres-nextcloud-0 -- psql -U nextcloud -d nextcloud -c '\l'
 </code></pre>
-<p>Deux subtilités rencontrées :</p>
+<h2 id="secrets">Secrets<a class="headerlink" href="#secrets" title="Permanent link">&para;</a></h2>
+<p>Trois Secrets, tous <strong>déclaratifs mais gitignorés</strong> (<code>stringData</code> = valeurs en clair,
+encodées par l'API server) :</p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Namespace</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postgres-nextcloud-credentials</code></td>
+<td><code>databases</code></td>
+<td>password de l'instance Postgres</td>
+</tr>
+<tr>
+<td><code>nextcloud-db</code></td>
+<td><code>nextcloud</code></td>
+<td>connexion DB côté Nextcloud — <strong>même password</strong> que ci-dessus (un Secret n'est pas lisible entre namespaces, il est dupliqué)</td>
+</tr>
+<tr>
+<td><code>nextcloud-admin</code></td>
+<td><code>nextcloud</code></td>
+<td>compte admin initial de l'interface web</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Deux pièges rencontrés sur les Secrets</p>
 <ol>
-<li><code>longhornctl</code> <strong>ne lit pas</strong> <code>~/.kube/config</code> par défaut → exporter <code>KUBECONFIG</code>
-   (pérennisé dans <code>~/.zshrc</code> : <code>export KUBECONFIG=$HOME/.kube/config</code>).</li>
-<li>Le preflight déploie ses pods dans <code>longhorn-system</code> → <strong>créer le namespace avant</strong> :</li>
+<li><strong>Mot de passe vide</strong> : un <code>password: ""</code> dans <code>nextcloud-admin</code> fait boucler
+   l'installeur (<code>Set an admin password. / Retrying install...</code>). Vérifier après apply :
+   <code>kubectl -n nextcloud get secret nextcloud-admin -o jsonpath='{.data.password}' | base64 -d</code></li>
+<li><strong>Caractères spéciaux YAML</strong> : un mot de passe commençant par <code>@</code>, <code>*</code>, <code>&amp;</code>, <code>%</code>…
+   casse le parsing (<code>found character that cannot start any token</code>).
+   <strong>Toujours quoter les valeurs</strong> : <code>password: '@WG26...'</code></li>
 </ol>
-<pre><code class="language-bash">kubectl create namespace longhorn-system
-longhornctl check preflight
-</code></pre>
-<p>Résultat attendu : uniquement des <code>info</code> sur worker-1 et worker-2.
-<code>cp-1</code> n'apparaît pas dans le rapport (taint control-plane) — c'est normal.</p>
+</div>
+<p>Le base64 des Secrets n'est <strong>pas</strong> du chiffrement — d'où le <code>.gitignore</code>. À terme :
+Sealed Secrets ou SOPS pour les versionner proprement (prérequis GitOps/ArgoCD).</p>
 <h2 id="installation-helm">Installation Helm<a class="headerlink" href="#installation-helm" title="Permanent link">&para;</a></h2>
-<p><code>longhorn-values.yaml</code> :</p>
-<pre><code class="language-yaml">defaultSettings:
-  defaultReplicaCount: 2
-  storageMinimalAvailablePercentage: 15
-  defaultDataPath: /var/lib/longhorn
-
-persistence:
-  defaultClass: true          # StorageClass &quot;longhorn&quot; devient la classe par défaut
-  defaultClassReplicaCount: 2
-</code></pre>
-<pre><code class="language-bash">helm repo add longhorn https://charts.longhorn.io
-helm repo update
-helm install longhorn longhorn/longhorn \
-  --namespace longhorn-system \
-  --version 1.12.0 \
-  -f longhorn-values.yaml
-</code></pre>
-<p>Notes post-install :</p>
+<p>Points clés de <code>nextcloud/nextcloud-values.yaml</code> :</p>
 <ul>
-<li>Un restart unique de <code>longhorn-manager</code> au premier démarrage est normal
-  (initialisation CRDs/webhook).</li>
-<li>Vérifier <code>kubectl get storageclass</code> : <code>longhorn</code> doit être marquée <code>(default)</code>
-  et être <strong>la seule</strong> classe par défaut.</li>
+<li><code>internalDatabase.enabled: false</code> + bloc <code>externalDatabase</code> → l'instance dédiée.</li>
+<li><code>nextcloud.existingSecret</code> / <code>externalDatabase.existingSecret</code> → aucun credential
+  dans les values, versionnables tels quels.</li>
+<li><code>configs.proxy.config.php</code> : <strong>indispensable derrière Cloudflare Tunnel</strong> —
+  TLS terminé en amont, le pod voit du HTTP pur. Sans <code>overwriteprotocol: https</code>,
+  liens générés en <code>http://</code> et boucles de redirection.</li>
+<li><code>cronjob.enabled: true</code> → un conteneur sidecar cron (le pod est donc <code>2/2</code>).</li>
+<li><code>startupProbe</code> généreuse (30×10 s) : le premier boot installe ~100 tables.</li>
 </ul>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">kubectl apply -f - &lt;&lt;'EOF'
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: test-longhorn
-spec:
-  accessModes: [&quot;ReadWriteOnce&quot;]
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 1Gi
-EOF
-kubectl get pvc test-longhorn   # -&gt; Bound
-kubectl delete pvc test-longhorn
+<pre><code class="language-bash">helm repo add nextcloud https://nextcloud.github.io/helm/
+helm install nextcloud nextcloud/nextcloud -n nextcloud --create-namespace \
+  -f nextcloud/nextcloud-values.yaml
+kubectl -n nextcloud logs -f deploy/nextcloud -c nextcloud   # suivre le 1er boot
 </code></pre>
-<h2 id="acces-a-lui-httpslonghornkanismilecom">Accès à l'UI — <a href="https://longhorn.kanismile.com">https://longhorn.kanismile.com</a><a class="headerlink" href="#acces-a-lui-httpslonghornkanismilecom" title="Permanent link">&para;</a></h2>
+<p>Premier boot réussi = cette séquence dans les logs :
+<code>Initializing nextcloud … → New nextcloud instance → Starting nextcloud installation
+→ Nextcloud was successfully installed → Setting trusted domains → Apache resuming normal operations</code></p>
 <div class="admonition danger">
-<p class="admonition-title">L'UI Longhorn n'a aucune authentification intégrée</p>
+<p class="admonition-title">Piège majeur : l'installation ratée laisse un PVC zombie</p>
+<p>L'entrypoint décide de lancer l'installeur en comparant le <strong>marqueur de version
+sur le volume</strong> avec celui de l'image — pas en regardant la base. Si la première
+installation échoue (ex. mot de passe admin vide) :
+fichiers copiés sur le PVC + <code>config.php</code> vide/partiel + base jamais peuplée
+→ aux redémarrages suivants, l'entrypoint croit l'instance installée et
+<strong>ne retente jamais</strong>. Symptômes trompeurs : pod <code>Running</code>, probes <code>status.php</code>
+en 200, mais <code>occ status</code> → <code>installed: false</code> et page web
+« Configuration was not read or initialized correctly ».
+<strong>Remède</strong> : corriger la cause, puis <code>helm uninstall</code> + <strong>suppression du PVC</strong>
++ <code>helm install</code>. Un simple restart ne suffit jamais.</p>
 </div>
-<p>Quiconque atteint la page peut supprimer volumes et backups. L'exposition publique
-n'est acceptable <strong>qu'avec Cloudflare Access actif</strong> sur le hostname.
-<strong>Ordre impératif lors de la mise en place : le verrou avant les chemins</strong> —
-1. Access policy → 2. route tunnel → 3. HTTPRoute. Dans l'autre sens, il existe
-une fenêtre où l'UI est publique sans protection (les nouveaux hostnames sont
-scannés en quelques minutes via Certificate Transparency).</p>
-<p>L'UI est exposée comme les autres services, avec une couche Access en plus :</p>
+<h2 id="exposition">Exposition<a class="headerlink" href="#exposition" title="Permanent link">&para;</a></h2>
+<p>Auth <strong>intégrée</strong> à Nextcloud → pas de Cloudflare Access nécessaire (contrairement à
+l'UI Longhorn). Deux pièces, détail des routes dans la page Cloudflare Tunnel :</p>
 <ol>
-<li><strong>Cloudflare Access</strong> (Zero Trust → Access → Applications) : application
-   self-hosted <code>longhorn</code> sur <code>longhorn.kanismile.com</code>, policy <code>admin-only</code>
-   (Allow, Include → Emails → adresse admin), login par One-time PIN.
-   Même pattern que l'application <code>Monitoring</code> (prometheus/alertmanager).</li>
-<li><strong>Route du tunnel</strong> <code>k8s-homelab</code> : <code>longhorn.kanismile.com</code> →
-   <code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code>.</li>
-<li><strong>HTTPRoute</strong> (<code>longhorn/longhorn-httproute.yaml</code>) : hostname
-   <code>longhorn.kanismile.com</code> → service <code>longhorn-frontend:80</code>, namespace
-   <code>longhorn-system</code>.</li>
+<li>Route du tunnel <code>k8s-homelab</code> : <code>nextcloud.kanismile.com</code> →
+   <code>http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80</code></li>
+<li><code>httpRoute/nextcloud-httproute.yaml</code> : hostname → service <code>nextcloud:8080</code></li>
 </ol>
-<p>Test de la protection : en navigation privée, <code>https://longhorn.kanismile.com</code>
-doit afficher la page Access (email + PIN) <strong>avant</strong> le dashboard. Un email
-hors policy ne reçoit pas de code valide (default-deny).</p>
-<p>Accès de secours sans passer par internet (debug, panne Cloudflare) :</p>
-<pre><code class="language-bash">kubectl -n longhorn-system port-forward svc/longhorn-frontend 8080:80
-# -&gt; http://localhost:8080
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">kubectl -n nextcloud get pods                     # 2/2 Running (app + cron)
+kubectl -n nextcloud exec deploy/nextcloud -c nextcloud -- php occ status   # installed: true
+kubectl -n databases exec -it postgres-nextcloud-0 -- \
+  psql -U nextcloud -d nextcloud -c '\dt'         # tables oc_*
 </code></pre>
+<p>Test de bout en bout : upload d'un fichier via l'interface, puis :</p>
+<pre><code class="language-bash">kubectl -n databases exec -it postgres-nextcloud-0 -- \
+  psql -U nextcloud -d nextcloud -c \
+  &quot;SELECT path, size FROM oc_filecache ORDER BY fileid DESC LIMIT 5;&quot;
+</code></pre>
+<p>Le fichier apparaît dans <code>oc_filecache</code> (métadonnées) et sur le PVC
+(<code>/var/www/html/data/&lt;user&gt;/files/</code>) — les deux moitiés du trajet d'upload.</p>
 <h2 id="reste-a-faire">Reste à faire<a class="headerlink" href="#reste-a-faire" title="Permanent link">&para;</a></h2>
 <ul>
-<li>[ ] <strong>Backup target</strong> (NFS ou S3) — <em>prioritaire : des données réelles vivent
-  désormais sur les volumes (Postgres + Nextcloud)</em>. Les réplicas protègent
-  d'une panne de nœud, pas d'une suppression accidentelle. Piste : NAS en
-  <code>nfs://…/longhorn-backups</code> + Recurring Jobs (snapshots + backups).</li>
-<li>[x] Exposer l'UI via NGINX Gateway Fabric (HTTPRoute) avec auth en amont
-  → fait, voir « Accès à l'UI » (Cloudflare Access + tunnel + HTTPRoute).</li>
-<li>[ ] <code>ServiceMonitor</code> Prometheus + dashboard Grafana (métriques Longhorn natives).</li>
-<li>[ ] Éventuelle StorageClass <code>longhorn-single</code> (<code>numberOfReplicas: "1"</code>) pour données jetables.</li>
-<li>[ ] Optionnel : baisser <code>storageReservedPercentageForDefaultDisk</code> de 30 → 20 %
-  pour libérer ~50-70 Gi/nœud (confort, pas un besoin actuel).</li>
+<li>[ ] <strong>Backups</strong> : dépend de la backup target Longhorn (voir page Longhorn) —
+      les deux PVC (fichiers + base) doivent y être couverts par des Recurring Jobs.</li>
+<li>[ ] Redis pour le verrouillage de fichiers et le cache (recommandé au-delà d'un
+      utilisateur ; le chart le propose en sous-chart).</li>
+<li>[ ] Stockage de masse : NAS en External Storage (app Nextcloud) pour les gros
+      médias froids — le PVC 50 Gi reste pour l'app et les données chaudes.</li>
+<li>[ ] Page « databases » dédiée si le namespace accueille d'autres instances.</li>
 </ul>
 <h2 id="references">Références<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Chart : <code>longhorn/longhorn</code> 1.12.0 — <a href="https://charts.longhorn.io">https://charts.longhorn.io</a></li>
-<li>CLI : <a href="https://github.com/longhorn/cli">https://github.com/longhorn/cli</a></li>
-<li>Multipath : <a href="https://longhorn.io/kb/troubleshooting-volume-with-multipath/">https://longhorn.io/kb/troubleshooting-volume-with-multipath/</a></li>
+<li>Chart : <a href="https://nextcloud.github.io/helm/">https://nextcloud.github.io/helm/</a></li>
+<li>Image : <code>nextcloud:34-apache</code> (via chart) · <code>postgres:17-alpine</code></li>
+<li>Reverse proxy : <a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html">https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html</a></li>
 </ul>
 
 
