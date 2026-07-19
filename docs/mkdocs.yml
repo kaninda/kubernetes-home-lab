@@ -90,6 +90,9 @@ nav:
       - ArgoCD Exposure via Gateway: argocd-exposure.md
       - GitOps Workflow: gitops-workflow.md
 
+  - Storage:
+      - Longhorn: longhorn.md
+
   - Monitoring:
       - Monitoring Stack: monitoring.md
 
