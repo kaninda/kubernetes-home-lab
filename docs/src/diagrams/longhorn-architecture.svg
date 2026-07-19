@@ -1,0 +1,77 @@
+<svg width="760" height="560" viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5b6472" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="760" height="560" fill="#ffffff"/>
+  <text x="380" y="34" text-anchor="middle" font-size="19" font-weight="600" fill="#1f2937">Longhorn — chemin d'une écriture (2 réplicas synchrones)</text>
+
+  <!-- Couche application -->
+  <rect x="60" y="60" width="150" height="52" rx="9" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="135" y="82" text-anchor="middle" font-size="14" font-weight="600" fill="#1e3a8a">Pod</text>
+  <text x="135" y="100" text-anchor="middle" font-size="11.5" fill="#3b5c9a">monte le volume</text>
+
+  <rect x="305" y="60" width="150" height="52" rx="9" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="380" y="82" text-anchor="middle" font-size="14" font-weight="600" fill="#1e3a8a">PVC</text>
+  <text x="380" y="100" text-anchor="middle" font-size="11.5" fill="#3b5c9a">class: longhorn</text>
+
+  <rect x="550" y="60" width="150" height="52" rx="9" fill="#f5f3ff" stroke="#c4b5fd"/>
+  <text x="625" y="82" text-anchor="middle" font-size="14" font-weight="600" fill="#4c1d95">StorageClass</text>
+  <text x="625" y="100" text-anchor="middle" font-size="11.5" fill="#6d4aa8">longhorn (default)</text>
+
+  <line x1="210" y1="86" x2="303" y2="86" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+  <line x1="455" y1="86" x2="548" y2="86" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+
+  <!-- CSI + Engine -->
+  <path d="M625 112 L625 136 L380 136 L380 158" fill="none" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+
+  <rect x="280" y="160" width="200" height="50" rx="9" fill="#f5f3ff" stroke="#c4b5fd"/>
+  <text x="380" y="181" text-anchor="middle" font-size="14" font-weight="600" fill="#4c1d95">Longhorn CSI Plugin</text>
+  <text x="380" y="198" text-anchor="middle" font-size="11.5" fill="#6d4aa8">attach / mount (iSCSI)</text>
+
+  <line x1="380" y1="210" x2="380" y2="232" stroke="#5b6472" stroke-width="1.6" marker-end="url(#arr)"/>
+
+  <rect x="280" y="234" width="200" height="50" rx="9" fill="#fdf2f8" stroke="#f9a8d4"/>
+  <text x="380" y="255" text-anchor="middle" font-size="14" font-weight="600" fill="#831843">Longhorn Engine</text>
+  <text x="380" y="272" text-anchor="middle" font-size="11.5" fill="#a84a78">1 engine par volume</text>
+
+  <!-- Cluster -->
+  <rect x="40" y="316" width="680" height="196" rx="18" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="64" y="344" font-size="14" font-weight="600" fill="#334155">Cluster bare-metal — Kubernetes v1.34</text>
+
+  <!-- Flèches engine -> réplicas -->
+  <path d="M380 284 L380 300 L340 300 L340 372" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrBlue)"/>
+  <path d="M380 284 L380 300 L580 300 L580 372" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrBlue)"/>
+  <text x="470" y="296" text-anchor="middle" font-size="11" fill="#2563eb">écritures synchrones</text>
+
+  <!-- cp-1 -->
+  <rect x="64" y="374" width="184" height="112" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="6 4"/>
+  <text x="156" y="400" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">cp-1</text>
+  <text x="156" y="418" text-anchor="middle" font-size="11.5" fill="#64748b">control-plane</text>
+  <rect x="82" y="434" width="148" height="34" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="156" y="450" text-anchor="middle" font-size="10.5" fill="#64748b">Taint NoSchedule</text>
+  <text x="156" y="463" text-anchor="middle" font-size="10.5" fill="#64748b">aucun composant Longhorn</text>
+
+  <!-- worker-1 -->
+  <rect x="268" y="374" width="184" height="112" rx="10" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="360" y="400" text-anchor="middle" font-size="14" font-weight="600" fill="#334155">worker-1</text>
+  <text x="360" y="418" text-anchor="middle" font-size="11.5" fill="#64748b">manager · instance-mgr · csi</text>
+  <rect x="286" y="434" width="148" height="34" rx="6" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="360" y="450" text-anchor="middle" font-size="11.5" font-weight="600" fill="#065f46">Réplica</text>
+  <text x="360" y="463" text-anchor="middle" font-size="10" fill="#0a7a5c">/var/lib/longhorn (NVMe ext4)</text>
+
+  <!-- worker-2 -->
+  <rect x="508" y="374" width="184" height="112" rx="10" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="600" y="400" text-anchor="middle" font-size="14" font-weight="600" fill="#334155">worker-2</text>
+  <text x="600" y="418" text-anchor="middle" font-size="11.5" fill="#64748b">manager · instance-mgr · csi</text>
+  <rect x="526" y="434" width="148" height="34" rx="6" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="600" y="450" text-anchor="middle" font-size="11.5" font-weight="600" fill="#065f46">Réplica</text>
+  <text x="600" y="463" text-anchor="middle" font-size="10" fill="#0a7a5c">/var/lib/longhorn (NVMe ext4)</text>
+
+  <text x="380" y="540" text-anchor="middle" font-size="11.5" fill="#64748b">Une écriture est confirmée quand les deux réplicas l'ont reçue — perte d'un worker sans perte de données.</text>
+</svg>
