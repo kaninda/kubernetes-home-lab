@@ -1,9 +1,10 @@
 # Longhorn — Stockage répliqué du cluster bare-metal
 
 !!! info "Résumé"
-    Longhorn **1.12.0** installé via Helm le **18/07/2026** sur le cluster bare-metal
-    (`cp-1` / `worker-1` / `worker-2`, Kubernetes v1.34.3).
-    StorageClass `longhorn` par défaut, **2 réplicas** par volume, données sur les workers uniquement.
+Longhorn **1.12.0** installé via Helm le **18/07/2026** sur le cluster bare-metal
+(`cp-1` / `worker-1` / `worker-2`, Kubernetes v1.34.3).
+StorageClass `longhorn` par défaut, **2 réplicas** par volume, données sur les workers uniquement.
+UI exposée sur <https://longhorn.kanismile.com>, protégée par Cloudflare Access.
 
 ## Architecture
 ![Architecture Longhorn](diagrams/longhorn-architecture.svg){ width="100%" }
@@ -16,6 +17,15 @@
 
 Pourquoi 2 réplicas et pas 3 : avec le taint sur `cp-1`, seuls 2 nœuds peuvent stocker.
 Un `defaultReplicaCount: 3` laisserait les volumes en état dégradé permanent.
+
+### Lecture des capacités (dashboard)
+
+- **Reserved** ≈ 30 % par disque : espace que Longhorn s'interdit d'allouer (OS, images).
+  Réglable via `storageReservedPercentageForDefaultDisk` (+ édition des disques déjà
+  enregistrés dans Node → disque → Storage Reserved).
+- **Used** compte l'empreinte **par réplica** : un PVC de 50 Gi = 100 Gi comptés (×2).
+- Les volumes sont **thin-provisioned** : seuls les blocs réellement écrits occupent
+  du disque ("Actual Size" dans l'UI). L'expansion de volume est supportée.
 
 ## Prérequis appliqués (workers uniquement pour les modules, les 3 nœuds pour le reste)
 
@@ -43,8 +53,8 @@ sudo systemctl disable --now multipathd multipathd.socket
 ## Vérification préalable — `longhornctl` (pas environment_check.sh)
 
 !!! warning "Piège rencontré"
-    Le script `environment_check.sh` documenté un peu partout est **déprécié et retiré**
-    des versions récentes → 404 sur les URL `v1.12.x`. Utiliser la CLI `longhornctl`.
+Le script `environment_check.sh` documenté un peu partout est **déprécié et retiré**
+des versions récentes → 404 sur les URL `v1.12.x`. Utiliser la CLI `longhornctl`.
 
 Depuis le poste d'admin (macOS Apple Silicon) :
 
@@ -118,9 +128,33 @@ kubectl get pvc test-longhorn   # -> Bound
 kubectl delete pvc test-longhorn
 ```
 
-## Accès à l'UI
+## Accès à l'UI — <https://longhorn.kanismile.com>
 
-Port-forward uniquement pour l'instant (l'UI n'a **aucune auth intégrée**) :
+!!! danger "L'UI Longhorn n'a aucune authentification intégrée"
+Quiconque atteint la page peut supprimer volumes et backups. L'exposition publique
+n'est acceptable **qu'avec Cloudflare Access actif** sur le hostname.
+**Ordre impératif lors de la mise en place : le verrou avant les chemins** —
+1. Access policy → 2. route tunnel → 3. HTTPRoute. Dans l'autre sens, il existe
+une fenêtre où l'UI est publique sans protection (les nouveaux hostnames sont
+scannés en quelques minutes via Certificate Transparency).
+
+L'UI est exposée comme les autres services, avec une couche Access en plus :
+
+1. **Cloudflare Access** (Zero Trust → Access → Applications) : application
+   self-hosted `longhorn` sur `longhorn.kanismile.com`, policy `admin-only`
+   (Allow, Include → Emails → adresse admin), login par One-time PIN.
+   Même pattern que l'application `Monitoring` (prometheus/alertmanager).
+2. **Route du tunnel** `k8s-homelab` : `longhorn.kanismile.com` →
+   `http://edge-gateway-nginx.nginx-gateway.svc.cluster.local:80`.
+3. **HTTPRoute** (`longhorn/longhorn-httproute.yaml`) : hostname
+   `longhorn.kanismile.com` → service `longhorn-frontend:80`, namespace
+   `longhorn-system`.
+
+Test de la protection : en navigation privée, `https://longhorn.kanismile.com`
+doit afficher la page Access (email + PIN) **avant** le dashboard. Un email
+hors policy ne reçoit pas de code valide (default-deny).
+
+Accès de secours sans passer par internet (debug, panne Cloudflare) :
 
 ```bash
 kubectl -n longhorn-system port-forward svc/longhorn-frontend 8080:80
@@ -129,11 +163,16 @@ kubectl -n longhorn-system port-forward svc/longhorn-frontend 8080:80
 
 ## Reste à faire
 
-- [ ] **Backup target** (S3 ou NFS) — *prioritaire avant de mettre de vraies données* :
-      les réplicas protègent d'une panne de nœud, pas d'une suppression accidentelle.
-- [ ] Exposer l'UI via NGINX Gateway Fabric (HTTPRoute) avec auth en amont.
+- [ ] **Backup target** (NFS ou S3) — *prioritaire : des données réelles vivent
+  désormais sur les volumes (Postgres + Nextcloud)*. Les réplicas protègent
+  d'une panne de nœud, pas d'une suppression accidentelle. Piste : NAS en
+  `nfs://…/longhorn-backups` + Recurring Jobs (snapshots + backups).
+- [x] Exposer l'UI via NGINX Gateway Fabric (HTTPRoute) avec auth en amont
+  → fait, voir « Accès à l'UI » (Cloudflare Access + tunnel + HTTPRoute).
 - [ ] `ServiceMonitor` Prometheus + dashboard Grafana (métriques Longhorn natives).
 - [ ] Éventuelle StorageClass `longhorn-single` (`numberOfReplicas: "1"`) pour données jetables.
+- [ ] Optionnel : baisser `storageReservedPercentageForDefaultDisk` de 30 → 20 %
+  pour libérer ~50-70 Gi/nœud (confort, pas un besoin actuel).
 
 ## Références
 
